@@ -7,9 +7,11 @@ on:
   workflow_dispatch:
 
 env:
-  APPLICATION_PUBLISH_PROFILE: ${{ secrets.APP_PUBLISH_PROFILE }}  
-  WEBAPP_NAME: ${{ secrets.WEBAPP_NAME }}
-  
+  APPLICATION_PUBLISH_PROFILE: ${{ secrets.STAGING_APP_PUBLISH_PROFILE }}  
+  WEBAPP_NAME: ${{ secrets.STAGING_WEBAPP_NAME }}
+  SKBT_BRANCH: ${{ secrets.STAGING_SKBT_BRANCH }}
+  SKBT_HTTP_HOST: ${{ secrets.STAGING_SKBT_HTTP_HOST }}
+  SKBT_SUBFOLDER: ${{ secrets.STAGING_SKBT_SUBFOLDER }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +26,8 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cp env.txt .env
-          echo ${{ env.SKBT_BRANCH }} >> .env
+          echo "${{ env.SKBT_BRANCH}}"
+          cp env.txt .env          
           cat .env
           npm install
           npm run build
