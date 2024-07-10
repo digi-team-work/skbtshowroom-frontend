@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 env:
-  APPLICATION_PUBLISH_PROFILE: ${{ secrets.APP_PUBLISH_PROFILE }}
+  APPLICATION_PUBLISH_PROFILE: ${{ secrets.APP_PUBLISH_PROFILE }}  
   WEBAPP_NAME: ${{ secrets.WEBAPP_NAME }}
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +25,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           cp env.txt .env
-          echo ${{ env.SKBT_BRANCH }}
+          echo ${{ env.SKBT_BRANCH }} >> .env
+          cat .env
           npm install
           npm run build
           mv ./build/static ./build/standalone/build
