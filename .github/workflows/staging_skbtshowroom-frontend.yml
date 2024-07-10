@@ -25,6 +25,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           cp env.txt .env
+          echo ${{ env.SKBT_BRANCH }}
           npm install
           npm run build
           mv ./build/static ./build/standalone/build
