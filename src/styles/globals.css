@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'kittithada';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url(fonts/kittithada-roman.woff2) format("woff2"),url(fonts/kittithada-roman.woff) format("woff")
+  }
+
+  @font-face {
+      font-family: 'kittithada';
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url(fonts/kittithada-medium.woff2) format("woff2"),url(fonts/kittithada-medium.woff) format("woff")
+  }
+
+  @font-face {
+      font-family: 'kittithada';
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+      src: url(fonts/kittithada-bold.woff2) format("woff2"),url(fonts/kittithada-bold.woff) format("woff")
+  }
+}
+
+/* html, body */
+html,
+body {
+  @apply font-kittithada h-full leading-none;
+}
+
+/* Component
+=============================== */
+/* button */
+.btn-style-1 {
+  @apply inline-flex items-center px-4 gap-2
+  font-medium uppercase text-[21px]
+  rounded-md border-0 bg-c-orange-500 text-white
+  transition-all duration-200
+  
+  py-[8px]
+  lg:py-[11px];
+
+  &:hover {
+    @apply bg-c-green-500;
+  }
+}
+
+.btn-style-2 {
+  @apply inline-flex items-center px-4 gap-2
+  font-medium uppercase text-[21px]
+  rounded-md border-0 bg-black/50 text-white
+  transition-all duration-200
+  
+  py-[8px]
+  lg:py-[11px];
+
+  &:hover {
+    @apply bg-black/80;
+  }
+}
+
+.btn-style-3 {
+  @apply inline-flex justify-center items-center gap-2
+  font-medium uppercase text-[21px]
+  rounded-full border-0 bg-c-orange-500 text-white
+   px-8 
+
+  transition-all duration-200
+  
+  py-[7px] min-h-[40px]
+  lg:py-[11px] lg:min-w-[214px] lg:min-h-[56px];
+
+  &:hover {
+    @apply bg-c-green-500;
+  }
+}
+
+.btn-style-4 {
+  @apply inline-flex justify-center items-center gap-2
+  font-medium uppercase text-[21px]
+  rounded-full border-0 bg-c-orange-500 text-white
+   px-8 
+
+  transition-all duration-200
+  
+  py-[8px]
+  lg:py-[11px];
+
+  &:hover {
+    @apply bg-c-green-500;
+  }
+}
+
+
+/* Dialog */
+.mainDialog {
+  @apply fixed left-[50%] top-[50%] z-50 
+  grid 
+  border border-slate-200 rounded-lg
+  bg-white shadow-lg
+  
+  w-full max-w-[1320px]
+  gap-4 p-6 pr-5
+
+  sm:w-[calc(100%-32px)] 
+  lg:py-[100px] lg:pl-20 lg:pr-[76px];
+}
+.dialog-overflow {
+  @apply overflow-x-hidden overflow-y-auto pr-1
+  max-h-[calc(100svh-48px)] 
+  lg:max-h-[calc(100vh-200px)];
+
+  &::-webkit-scrollbar {
+    @apply w-[4px];
+  }
+  
+  &::-webkit-scrollbar-track {
+    @apply bg-c-gray-200;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    @apply bg-c-orange-500;
+  }
+}
+.btnCloseDialog {
+  @apply flex justify-center items-center absolute rounded-full
+  bg-c-orange-500
+  transition-all duration-200 ease-in-out
+  
+  right-4 top-4 size-8
+  lg:right-6 lg:top-6 lg:w-[60px] lg:h-[60px];
+
+  svg {
+    @apply stroke-white 
+    size-5
+    lg:w-8 lg:h-8;
+  }
+
+  &:hover {
+    @apply bg-c-green-500;
+  }
+}
