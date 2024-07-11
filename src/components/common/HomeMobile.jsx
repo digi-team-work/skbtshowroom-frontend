@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { gsap } from "gsap";
 import { useState } from 'react';
 
-export default function HomeMobile() {
+export default function HomeMobile({basePath}) {
   const router = useRouter();
   const ground = useRef();
   const bg = useRef();

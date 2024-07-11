@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { gsap } from "gsap";
 
-export default function HomeDesktop() {
+export default function HomeDesktop({basePath}) {
   const router = useRouter();
   const [start, setStart] = useState(false);
   const anchorRef = useRef();
@@ -137,12 +137,12 @@ export default function HomeDesktop() {
     return () => cancelAnimationFrame(animateFrame);
   }, [start]);
 
-  return (
+  return (    
     <div className='home-page'>
       <div ref={anchorRef} className='anchor'>
         <div ref={scene} className="scene">
           <div className='bg'>
-            <img className='bg-rp' src="/assets/img/home/bg-home.png" alt="bg" width={3000} height={1260} />
+            <img className='bg-rp' src={`${basePath}/assets/img/home/bg-home.png`} alt="bg" width={3000} height={1260} />
 
             <div className='bird-fly'>
               <video width="320" height="240" autoPlay playsInline muted loop>

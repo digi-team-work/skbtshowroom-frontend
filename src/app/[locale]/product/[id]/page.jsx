@@ -24,7 +24,7 @@ export default async function ProductDetail({ params }) {
 
   return (
     <div className='product-page'>
-      {/* header */}
+      {/* header */}      
       <ProductHeader header={productCMS.cms.header} back_showroom={t('back_showroom')} />
 
       {/* sections */}
@@ -58,7 +58,7 @@ export default async function ProductDetail({ params }) {
                 <div className='section-title'>
                   {section.title.mascot && (
                     <div className='mascot'>
-                      <Image src="/assets/img/product/mascot.png" alt="mascot" width={250} height={250} />
+                      <Image src={`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
                     </div>
                   )}
 
