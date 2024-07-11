@@ -59,7 +59,8 @@ export default async function ProductDetail({ params }) {
                 <div className='section-title'>
                   {section.title.mascot && (
                     <div className='mascot'>
-                      <Image src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
+                      {/* <Image src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} /> */}
+                      <img src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
                     </div>
                   )}
 
@@ -68,7 +69,8 @@ export default async function ProductDetail({ params }) {
                     style={section.title.style}
                   >
                     {section.title.url == "" ? (section.title.text):(
-                      <Image src={section.title.url} alt={`${section.title.text}`} width={640} height={125} />
+                      // <Image src={section.title.url} alt={`${section.title.text}`} width={640} height={125} />
+                      <img src={section.title.url} alt={`${section.title.text}`} width={640} height={125} />
                     )}
                   </h2>
                 </div>
@@ -114,7 +116,8 @@ export default async function ProductDetail({ params }) {
                     style={section.title.style}
                   >
                     {section.title.url == "" ? (section.title.text):(
-                      <Image src={section.title.url} alt={`${section.title.text}`} width={860} height={125} />
+                      // <Image src={section.title.url} alt={`${section.title.text}`} width={860} height={125} />
+                      <img src={section.title.url} alt={`${section.title.text}`} width={860} height={125} />
                     )}
                   </h2>
                 </div>

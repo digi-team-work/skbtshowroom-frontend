@@ -3,17 +3,23 @@ const createNextIntlPlugin = require('next-intl/plugin');
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  distDir: 'build',
-  output: 'standalone',  
-  // basePath: `${process.env.SKBT_SUBFOLDER}`,
-  assetPrefix: `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`,
-  // images: {
-  //   loader: 'custom',
-  //   loaderFile: `./src/image/loader-${process.env.SKBT_BRANCH}.js`,
-  // },
-};
+let nextConfig;
+if(process.env.SKBT_BRANCH == "dev"){
+   nextConfig = {
+    reactStrictMode: true,
+    distDir: 'build',
+    output: 'standalone',  
+    basePath: `${process.env.SKBT_SUBFOLDER}`,
+    assetPrefix: `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`,  
+  };
+}else{
+   nextConfig = {
+    reactStrictMode: true,
+    distDir: 'build',
+    output: 'standalone',      
+    assetPrefix: `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`,  
+  };
+}
 
 module.exports = withNextIntl(nextConfig);
 
