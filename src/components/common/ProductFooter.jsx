@@ -7,7 +7,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export default function ProductFooter({copyright="สงวนลิขสิทธิ์ © 2022 บริษัทสยามคูโบต้าคอร์ปอเรชั่น จำกัด", back2top="กลับสู่ด้านบน"}) {
+export default function ProductFooter({copyright="สงวนลิขสิทธิ์ © 2022 บริษัทสยามคูโบต้าคอร์ปอเรชั่น จำกัด", basePath , back2top="กลับสู่ด้านบน"}) {
   const b2t = useRef();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function ProductFooter({copyright="สงวนลิขสิท
           gsap.to(window, { duration: 1, scrollTo: 0 });
         }}
       >
-        <img src='/assets/img/product/back2top.png' alt='back to top' />
+        <img src={`${basePath}/assets/img/product/back2top.png`} alt='back to top' />
         <div>{back2top}</div>
       </div>
     </>

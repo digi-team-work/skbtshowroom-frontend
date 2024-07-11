@@ -21,11 +21,12 @@ export default async function ProductDetail({ params }) {
   const locale = await getLocale();
   const t = await getTranslations('Product');
   const productCMS = await getProductDetail(locale, params.id);
+  const basePath = `${process.env.SKBT_BASEPATH}`;
 
   return (
     <div className='product-page'>
       {/* header */}      
-      <ProductHeader header={productCMS.cms.header} back_showroom={t('back_showroom')} />
+      <ProductHeader header={productCMS.cms.header} basePath={basePath} back_showroom={t('back_showroom')} />
 
       {/* sections */}
       {productCMS.cms.sections?.map((section, sectionKey) => (
@@ -58,7 +59,7 @@ export default async function ProductDetail({ params }) {
                 <div className='section-title'>
                   {section.title.mascot && (
                     <div className='mascot'>
-                      <Image src={`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
+                      <Image src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
                     </div>
                   )}
 
@@ -215,7 +216,7 @@ export default async function ProductDetail({ params }) {
       ))}
 
       {/* footer */}
-      <ProductFooter copyright={t('copyright')} back2top={t('back2top')} />
+      <ProductFooter copyright={t('copyright')} basePath={basePath} back2top={t('back2top')} />
     </div>
   );
 }

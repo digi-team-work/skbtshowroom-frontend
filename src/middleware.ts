@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
 
-const locales: string[] = ['th', 'en']
+const locales: string[] = ['th']
 // const publicPages: string[] = ['/', '/login', '/room', '/room3d', '/blob', '/room_1', '/index_bk', '/master1']
 
 const intlMiddleware = createMiddleware({
   locales,
+  localePrefix:'as-needed',
   defaultLocale: 'th'
 })
 

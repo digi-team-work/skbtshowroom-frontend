@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { gsap } from "gsap";
 
-export default function ProductHeader({header, back_showroom}) {
+export default function ProductHeader({header, basePath, back_showroom}) {
   const router = useRouter();
   const productTPRef = useRef();
 
@@ -36,7 +36,7 @@ export default function ProductHeader({header, back_showroom}) {
                     
                   }}
                 >
-                  <img src="/assets/img/icon/back.svg" alt={`${back_showroom}`} />
+                  <img src={`${basePath}/assets/img/icon/back.svg`} alt={`${back_showroom}`} />
                   {back_showroom}
                 </a>
               )}
