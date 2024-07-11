@@ -750,7 +750,7 @@ export async function GET(request) {
             {
               widget : "section-1",
               style : {
-                background:"url(/assets/img/product/demo-bg-1.png) center top"
+                background:`url(${basePath}/assets/img/product/demo-bg-1.png) center top`
               },
               title : {
                 text : "คุ้ม..กับห้องโดยสาร ที่ตอบโจทย์ การทำงานและปลอดภัย",
@@ -849,7 +849,7 @@ export async function GET(request) {
             {
               widget : "section-2",
               style : {
-                background:"url(/assets/img/product/demo-bg-2.png) center top",
+                background:`url(${basePath}/assets/img/product/demo-bg-2.png) center top`,
                 backgroundSize:"cover"
               },
               title : {
@@ -1119,7 +1119,7 @@ export async function GET(request) {
             {
               widget : "section-1",
               style : {
-                background:"url(/assets/img/product/demo-bg-1.png) center top"
+                background:`url(${basePath}/assets/img/product/demo-bg-1.png) center top`
               },
               title : {
                 text : "คุ้ม..กับห้องโดยสาร ที่ตอบโจทย์ การทำงานและปลอดภัย",
@@ -1218,7 +1218,7 @@ export async function GET(request) {
             {
               widget : "section-2",
               style : {
-                background:"url(/assets/img/product/demo-bg-2.png) center top",
+                background:`url(${basePath}/assets/img/product/demo-bg-2.png) center top`,
                 backgroundSize:"cover"
               },
               title : {
