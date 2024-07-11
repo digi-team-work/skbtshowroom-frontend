@@ -6,7 +6,7 @@ const locales: string[] = ['th', 'en']
 
 const intlMiddleware = createMiddleware({
   locales,
-  defaultLocale: 'th',
+  defaultLocale: 'th'
 })
 
 export default function middleware(req: NextRequest): Promise<NextResponse> | NextResponse {
@@ -25,4 +25,5 @@ export default function middleware(req: NextRequest): Promise<NextResponse> | Ne
 export const config = {
   // Skip all paths that should not be internationalized
   matcher: ['/', '/(th|en)/:path*', '/((?!api|_next|.*\\..*).*)'],
+
 }
