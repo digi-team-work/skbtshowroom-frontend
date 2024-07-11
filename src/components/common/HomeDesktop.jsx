@@ -146,13 +146,13 @@ export default function HomeDesktop({basePath}) {
 
             <div className='bird-fly'>
               <video width="320" height="240" autoPlay playsInline muted loop>
-                <source src="/assets/video/home-bird-fly.mp4" type="video/mp4" />
+                <source src={`${basePath}/assets/video/home-bird-fly.mp4`} type="video/mp4" />
               </video>
             </div>
 
             <div className='frame-video'>
               <video width="320" height="240" autoPlay playsInline muted loop>
-                <source src="/assets/video/home.mp4" type="video/mp4" />
+                <source src={`${basePath}/assets/video/home.mp4`} type="video/mp4" />
               </video>
             </div>
           </div>
@@ -175,10 +175,10 @@ export default function HomeDesktop({basePath}) {
             <div></div>
           </div>
 
-          <div className='drone'><img src="/assets/img/home/drone.png" alt="drone" width={210} height={71} /></div>
-          <div className='tree'><img src="/assets/img/home/tree.png" alt="tree" width={925} height={986} /></div>
-          <div className='kubota-1'><img src="/assets/img/home/kubota-1.png" alt="kubota" width={597} height={378} /></div>
-          <div className='kubota-2'><img src="/assets/img/home/kubota-2.png" alt="kubota" width={384} height={336} /></div>
+          <div className='drone'><img src={`${basePath}/assets/img/home/drone.png`} alt="drone" width={210} height={71} /></div>
+          <div className='tree'><img src={`${basePath}/assets/img/home/tree.png`} alt="tree" width={925} height={986} /></div>
+          <div className='kubota-1'><img src={`${basePath}/assets/img/home/kubota-1.png`} alt="kubota" width={597} height={378} /></div>
+          <div className='kubota-2'><img src={`${basePath}/assets/img/home/kubota-2.png`} alt="kubota" width={384} height={336} /></div>
           <div 
             className='enter' 
             onClick={() => {
@@ -186,14 +186,14 @@ export default function HomeDesktop({basePath}) {
               setStart(true);
             }}
           >
-            <img className='arrow-1' src="/assets/img/home/enter.png" alt="enter" width={51} height={90} />
-            <img className='arrow-2' src="/assets/img/home/enter.png" alt="enter" width={51} height={90} />
+            <img className='arrow-1' src={`${basePath}/assets/img/home/enter.png`} alt="enter" width={51} height={90} />
+            <img className='arrow-2' src={`${basePath}/assets/img/home/enter.png`} alt="enter" width={51} height={90} />
           </div>
-          <div className='presenter'><img src="/assets/img/home/presenter.png" alt="presenter" width={161} height={318} /></div>
+          <div className='presenter'><img src={`${basePath}/assets/img/home/presenter.png`} alt="presenter" width={161} height={318} /></div>
         </div>
       </div>
 
-      <div className='logo-kubota'><img src="/assets/img/home/logo.png" alt="logo" width={221} height={71} /></div>
+      <div className='logo-kubota'><img src={`${basePath}/assets/img/home/logo.png`} alt="logo" width={221} height={71} /></div>
 
       <div ref={tp} className='transition-page'></div>
     </div>

@@ -60,22 +60,22 @@ export default function HomeMobile({basePath}) {
       <div ref={ground} className='bg-mobile'></div>
 
       <div className='logo-kubota'>
-        <img ref={logo} src="/assets/img/home/logo.png" alt="logo" />
+        <img ref={logo} src={`${basePath}/assets/img/home/logo.png`} alt="logo" />
       </div>
 
       <div className='box-showroom'>
         <div className='scene'>
           <div ref={bg} className='bg-showroom'>
-            <img src="/assets/img/home/bg-home-mobile.png" alt="" />
+            <img src={`${basePath}/assets/img/home/bg-home-mobile.png"`} alt="" />
           </div>
 
-          <div ref={kubota1} className='kubota-1'><img src="/assets/img/home/kubota-1.png" alt="kubota" width={597} height={378} /></div>
-          <div ref={kubota2} className='kubota-2'><img src="/assets/img/home/kubota-2.png" alt="kubota" width={384} height={336} /></div>
+          <div ref={kubota1} className='kubota-1'><img src={`${basePath}/assets/img/home/kubota-1.png"`} alt="kubota" width={597} height={378} /></div>
+          <div ref={kubota2} className='kubota-2'><img src={`${basePath}/assets/img/home/kubota-2.png`} alt="kubota" width={384} height={336} /></div>
           <div ref={enter} className='enter'>
-            <img className='arrow-1' src="/assets/img/home/enter.png" alt="enter" width={51} height={90} />
-            <img className='arrow-2' src="/assets/img/home/enter.png" alt="enter" width={51} height={90} />
+            <img className='arrow-1' src={`${basePath}/assets/img/home/enter.png`} alt="enter" width={51} height={90} />
+            <img className='arrow-2' src={`${basePath}/assets/img/home/enter.png`} alt="enter" width={51} height={90} />
           </div>
-          <div ref={presenter} className='presenter'><img src="/assets/img/home/presenter.png" alt="presenter" width={161} height={318} /></div>
+          <div ref={presenter} className='presenter'><img src={`${basePath}/assets/img/home/presenter.png`} alt="presenter" width={161} height={318} /></div>
         </div>
       </div>
 
