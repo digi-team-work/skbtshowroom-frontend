@@ -12,6 +12,7 @@ env:
   SKBT_BRANCH: ${{ secrets.STAGING_SKBT_BRANCH }}
   SKBT_HTTP_HOST: ${{ secrets.STAGING_SKBT_HTTP_HOST }}
   SKBT_SUBFOLDER: ${{ secrets.STAGING_SKBT_SUBFOLDER }}
+  SKBT_BASEPATH: ${{ secrets.STAGING_SKBT_BASEPATH }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          envsubst '\$SKBT_BRANCH,\$SKBT_HTTP_HOST,\$SKBT_SUBFOLDER' < .env.template > .env
+          envsubst '\$SKBT_BRANCH,\$SKBT_HTTP_HOST,\$SKBT_SUBFOLDER,\$SKBT_BASEPATH' < .env.template > .env
           cat .env 
           npm install
           npm run build
