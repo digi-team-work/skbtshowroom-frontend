@@ -59,7 +59,7 @@ export const Ground = ({room_depth, pos}) => {
   )
 }
 
-export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, basePath}) => {
+export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic_2, basePath}) => {
   const { nodes, materials } = useGLTF(basePath+'/room-upper.glb');
 
   return (
@@ -800,7 +800,7 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, basePath})
         position={[0, -0.772, 1.915]}
         scale={[1, 1.324, 1.324]}
       />
-      {/* <mesh
+      <mesh
         castShadow
         receiveShadow
         geometry={nodes.picture_02.geometry}
@@ -816,11 +816,12 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, basePath})
         receiveShadow
         geometry={nodes.picture_01.geometry}
         // material={materials['matPicture.001']}
+
         position={[0.312, -0.552, -0.966]}
         scale={[1.032, 1.196, 1.196]}
       >
         <meshBasicMaterial map={pic_1} />
-      </mesh> */}
+      </mesh>
     </group>
   )
 }
@@ -1126,8 +1127,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
 }
 
 export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath}) => {
-  // const [pic_1, pic_2] = useLoader(TextureLoader, picture);
-
+  const [pic_1, pic_2] = useLoader(TextureLoader, picture);
   const roomRef = useRef();
   const scroll = useScroll();
 
@@ -1157,10 +1157,10 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
   return (
     <group ref={roomRef} position={[0,0,0]}>
 
-      <OneRoom position={[0,0,mcDepth]} basePath={basePath} />
-      <OneRoom position={[0,0,0]} basePath={basePath} />
+      <OneRoom position={[0,0,mcDepth]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
+      <OneRoom position={[0,0,0]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
       {room_repeat_arr.map((item, itemKey) => (
-        <OneRoom key={itemKey} position={[0,0,-mcDepth*(itemKey+1)]} basePath={basePath} />
+        <OneRoom key={itemKey} position={[0,0,-mcDepth*(itemKey+1)]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
       ))}
 
       {items.map((item, itemKey) => (

@@ -11,6 +11,7 @@ if(process.env.SKBT_BRANCH == "dev"){
     output: 'standalone',  
     basePath: `${process.env.SKBT_SUBFOLDER}`,
     assetPrefix: `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`,  
+    crossOrigin: 'anonymous',
   };
 }else{
    nextConfig = {
@@ -18,6 +19,7 @@ if(process.env.SKBT_BRANCH == "dev"){
     distDir: 'build',
     output: 'standalone',      
     assetPrefix: `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`,  
+    crossOrigin: 'anonymous',
   };
 }
 
