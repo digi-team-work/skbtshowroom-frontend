@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { gsap } from "gsap";
 
-export default function HomeDesktop({basePath}) {
+export default function HomeDesktop({basePath, linkPath}) {
   const router = useRouter();
   const [start, setStart] = useState(false);
   const anchorRef = useRef();
@@ -101,7 +101,7 @@ export default function HomeDesktop({basePath}) {
             y:-300,
             z:0,
             onComplete:function(){
-              router.push('/showroom');
+              router.push(`${linkPath}/showroom`);
           }});
   
           gsap.to(scene.current, {
