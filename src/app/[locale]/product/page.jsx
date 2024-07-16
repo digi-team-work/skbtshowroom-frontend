@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
 
 export default function Product() {
-  redirect(`/product/1`);
+  const basePath = `${process.env.SKBT_BASEPATH}`;
+
+  redirect(`${basePath}/product/1`);
 }

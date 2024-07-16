@@ -800,7 +800,7 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic
         position={[0, -0.772, 1.915]}
         scale={[1, 1.324, 1.324]}
       />
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.picture_02.geometry}
@@ -816,12 +816,11 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic
         receiveShadow
         geometry={nodes.picture_01.geometry}
         // material={materials['matPicture.001']}
-
         position={[0.312, -0.552, -0.966]}
         scale={[1.032, 1.196, 1.196]}
       >
         <meshBasicMaterial map={pic_1} />
-      </mesh>
+      </mesh> */}
     </group>
   )
 }
@@ -1128,6 +1127,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
 
 export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath}) => {
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
+
   const roomRef = useRef();
   const scroll = useScroll();
 
