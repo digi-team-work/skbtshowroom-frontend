@@ -61,7 +61,7 @@ export default function HallPage() {
 
   const picture = [
     "https://skbtshowro-63f18fa59ed4f402-endpoint.azureedge.net/blobskbtshowrob65396eeec/onlineshowroom-backend/wp-content/uploads/2024/07/sea_coast_aerial_view_140442_2560x1080-1024x432.jpg", 
-    "https://skbtshowro-63f18fa59ed4f402-endpoint.azureedge.net/blobskbtshowrob65396eeec/onlineshowroom-backend/wp-content/uploads/2024/07/sea_coast_aerial_view_140442_2560x1080-1024x432.jpg"
+    "https://skbtshowro-63f18fa59ed4f402-endpoint.azureedge.net/blobskbtshowroom-frontend/public/picture-01.png"
   ];
 
   return (
