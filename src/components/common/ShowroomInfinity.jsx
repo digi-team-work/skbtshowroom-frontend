@@ -23,7 +23,7 @@ export default function ShowroomInfinity({items, picture, basePath}) {
       }});
     }else {
       if(firstTime){
-        gsap.fromTo(transitionPageRef.current, {opacity:1}, {opacity:0, delay:3.85, duration:0.6, onComplete:function(){
+        gsap.fromTo(transitionPageRef.current, {opacity:1}, {opacity:0, delay:1.5, duration:0.6, onComplete:function(){
           setHowto(false);
         }});
         setFirstTime(false);
@@ -35,6 +35,28 @@ export default function ShowroomInfinity({items, picture, basePath}) {
   return (
     <>
       <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} />
+
+      <div className='flex justify-center items-center fixed left-0 bottom-0 w-full h-auto pointer-events-none select-none z-[90] p-4 bg-gradient-to-b from-black/0 to-black/50'>
+        <div className='grid grid-cols-2 gap-10 text-lg lg:text-xl  leading-[10px] text-center text-white'>
+          <div>
+          <div className='block relative mx-auto my-4 w-6 h-10 border border-white rounded-full'>
+              <span className='block absolute left-0 right-0 top-2 mx-auto w-[1px] h-2 rounded-full bg-white'></span>
+            </div>
+            <div className='leading-none'>
+              MAC เลื่อนขึ้น
+            </div>
+          </div>
+
+          <div>
+            <div className='block relative mx-auto my-4 w-6 h-10 border border-white rounded-full'>
+              <span className='block absolute left-0 right-0 bottom-2 mx-auto w-[1px] h-2 rounded-full bg-white'></span>
+            </div>
+            <div className='leading-none'>
+              WINDOW เลื่อนลง
+            </div>
+          </div>
+        </div> 
+      </div>
       
       <div ref={transitionPageRef} className='transitionPage flex justify-center items-center fixed left-0 top-0 w-full h-[100vh] bg-white pointer-events-none select-none z-[100]'>
         {howto && (
@@ -52,6 +74,7 @@ export default function ShowroomInfinity({items, picture, basePath}) {
               <div className='text-3xl font-bold'>LOADING</div>
             </div>
 
+            {/*
             <hr className='border-t-[3px] border-dotted my-10' />
 
             <div className='grid grid-cols-2 gap-4 text-lg lg:text-xl font-medium leading-[10px] text-center'>
@@ -72,7 +95,9 @@ export default function ShowroomInfinity({items, picture, basePath}) {
                   <span className='block absolute left-0 right-0 bottom-2 mx-auto w-[3px] h-3 rounded-full bg-black'></span>
                 </div>
               </div>
-            </div>
+            </div> 
+            */}
+
           </div>
         )}
       </div>

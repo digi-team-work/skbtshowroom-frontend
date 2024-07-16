@@ -1288,7 +1288,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath}) => {
         near={0.5}
         initial={{far:1, near:0.5}}
         animate={{far:100, near:70 }}
-        transition={{ ease:[0.33, 1, 0.68, 1], delay:2.5, duration: 3 }}
+        transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
       />
       <color attach='background' args={['#ffffff']} />
       <ambientLight intensity={1.6} />
@@ -1303,7 +1303,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath}) => {
         <motion.group
             initial={{ z: -20 }}
             animate={{ z: 0}}
-            transition={{ ease:[0.33, 1, 0.68, 1], delay:2.5, duration: 3 }}
+            transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
           <ScrollControls infinite damping={mq ? (1):(0)} pages={count_items}>
               <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} />
