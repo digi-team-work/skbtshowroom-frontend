@@ -185,7 +185,8 @@
 
   .bg-mobile {
     @apply w-full h-[100vh] fixed left-0 top-0 overflow-hidden 
-    bg-[url(/assets/img/home/bg-mobile.png)] bg-no-repeat bg-left-top bg-[length:100%_100%];
+    /* bg-[url(/assets/img/home/bg-mobile.png)]  */
+    bg-no-repeat bg-left-top bg-[length:100%_100%];
   }
 
   .logo-kubota {

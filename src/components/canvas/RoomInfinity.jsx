@@ -4,8 +4,8 @@ import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'r
 import { useRouter } from 'next/navigation'
 
 // import * as THREE from 'three'
-import { TextureLoader, Vector3, DoubleSide, MathUtils, RepeatWrapping, LinearEncoding } from 'three'
-import { useGLTF, useCursor, StatsGl, Environment, MeshReflectorMaterial, CameraShake, PerspectiveCamera, Line, useTexture, ScrollControls, useScroll, Preload} from '@react-three/drei'
+import { TextureLoader, Vector3, DoubleSide, MathUtils, RepeatWrapping, LinearEncoding, sRGBEncoding, AdditiveBlending, BackSide, VideoTexture} from 'three'
+import { useGLTF, useCursor, StatsGl, Environment, MeshReflectorMaterial, CameraShake, PerspectiveCamera, Line, useTexture, ScrollControls, useScroll, Preload, useSpriteLoader, SpriteAnimator} from '@react-three/drei'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 
 import { motion } from "framer-motion-3d"
@@ -59,8 +59,8 @@ export const Ground = ({room_depth, pos}) => {
   )
 }
 
-export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic_2}) => {
-  const { nodes, materials } = useGLTF('/room-upper.glb');
+export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic_2, basePath}) => {
+  const { nodes, materials } = useGLTF(basePath+'/room-upper.glb');
 
   return (
     <group position={position} dispose={null}>
@@ -787,18 +787,27 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic
         receiveShadow
         geometry={nodes.framePicture_01.geometry}
         material={materials.matFramePicture}
+
+        position={[0.312, -0.552, -0.966]}
+        scale={[1.032, 1.196, 1.196]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.framePicture_02.geometry}
         material={materials.matFramePicture}
+
+        position={[0, -0.772, 1.915]}
+        scale={[1, 1.324, 1.324]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.picture_02.geometry}
         // material={materials['matPicture.002']}
+
+        position={[0, -0.772, 1.915]}
+        scale={[1, 1.324, 1.324]}
       >
         <meshBasicMaterial map={pic_2} />
       </mesh>
@@ -807,13 +816,16 @@ export const OneRoom = ({position=[0,0,0], table=true, wallEnd=false, pic_1, pic
         receiveShadow
         geometry={nodes.picture_01.geometry}
         // material={materials['matPicture.001']}
+
+        position={[0.312, -0.552, -0.966]}
+        scale={[1.032, 1.196, 1.196]}
       >
         <meshBasicMaterial map={pic_1} />
       </mesh>
     </group>
   )
 }
-useGLTF.preload('/room-upper.glb')
+// useGLTF.preload('/room-upper.glb')
 
 export const Stand = ({hover}) => {
   const [Rmin, setRmin] = useState(0);
@@ -841,7 +853,152 @@ export const Stand = ({hover}) => {
   )
 }
 
-export const OneProduct = ({indexKey, texture, pos, setFocus,  itemTotal, scroll, interactive}) => {
+export const Video = ({basePath}) => {
+  const particle = useRef();
+  const [video] = useState(() => Object.assign(document.createElement('video'), { src: basePath+'/bg-presenter.mp4', crossOrigin: 'Anonymous', loop: true, playsinline:true, muted: true }))
+  useEffect(() => void video.play(), [video])
+
+  useFrame(() => {
+    particle.current.rotation.y += 0.001;
+  })
+
+  return (
+    <mesh ref={particle} position={[0,-1,0]} rotation={[0,0,0]} scale={0.15}>
+      <sphereGeometry args={[10, 32, 32]} />
+      <meshBasicMaterial toneMapped={false} color={[1,1,1]} blending={AdditiveBlending} side={BackSide} transparent={true}> 
+        <videoTexture attach="map" color="#000000" args={[video]} />
+      </meshBasicMaterial>
+    </mesh>
+  )
+}
+
+export const vertexShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+`;
+
+export const fragmentShader = `
+    uniform sampler2D uTexture;
+    varying vec2 vUv;
+    void main() {
+        vec4 textureColor = texture2D(uTexture, vec2(vUv.x, 0.5 + vUv.y/2.)); 
+        vec4 textureWhite = texture2D(uTexture, vec2(vUv.x, vUv.y/2.));
+        gl_FragColor = vec4(textureColor.xyz, textureWhite.x); 
+    }
+`;
+
+export const VideoComponent = ({video, scroll}) => {
+  const [countHi, setCountHi] = useState(0);
+  const [video_presenter] = useState(() => Object.assign(
+    document.createElement('video'), 
+    { src: video[0], crossOrigin: 'Anonymous', controls : true, loop: false, playsinline:true, muted: true 
+  }))
+  // useEffect(() => void video_presenter.play(), [video_presenter])
+
+  useFrame(() => {
+    // console.log(scroll.offset, frameName);
+    if(scroll.offset >= 0.9){
+      if (countHi == 0) {
+        // if(video_presenter.ended){
+        //   video_presenter.currentTime = 0;
+        // }
+
+        video_presenter.play();
+        setCountHi(countHi+1);
+      }
+    }else {
+      if(countHi > 0){
+        setCountHi(0);
+      }
+    }
+  });
+
+  // const vt = new VideoTexture(video_presenter);
+  // const uniforms = {
+  //   uTexture: { value: vt },
+  // };
+
+
+  
+
+  return (
+    <mesh position={[0,-0.17,0]}>
+      <planeGeometry args={[6, 6]} />
+      <meshBasicMaterial toneMapped={false} color={[1,1,1]} transparent={true}> 
+        <videoTexture attach="map" color="#000000" args={[video_presenter]} encoding={sRGBEncoding} />
+      </meshBasicMaterial>
+
+      {/* 
+      <mesh position={[-0.1,-1.06,0.1]}>
+        <planeGeometry args={[3,3]} />
+          <shaderMaterial
+          depthTest={false}
+          transparent={true}
+          uniforms={uniforms}
+          vertexShader={vertexShader}
+          fragmentShader={fragmentShader}
+        />
+        </mesh>
+      */}
+    </mesh>
+  )
+};
+
+// export const VideoPresenter = ({video, scroll}) => {
+//   const [frameName, setFrameName] = useState('stand');
+//   const [countHello, setCountHello] = useState(0);
+//   const { spriteObj } = useSpriteLoader(
+//     video[0],
+//     video[1],
+  
+//     ['stand', 'hello'],
+//     null
+//   );
+
+//   const onEnd = ({ currentFrameName, currentFrame }) => {
+//     if (currentFrameName === 'hello') {
+//       setFrameName('stand')
+//     }
+//   }
+
+//   // setFrameName('hello')
+//   useFrame(() => {
+//     // console.log(scroll.offset, frameName);
+//     if(scroll.offset >= 0.9){
+//       if (frameName === 'stand' && countHello == 0) {
+//         setFrameName('hello');
+//         setCountHello(countHello+1);
+//       }
+//     }else {
+//       if(countHello > 0){
+//         setCountHello(0);
+//       }
+//     }
+//   });
+
+//   return (
+//     <SpriteAnimator
+//       scale={5.9}
+//       position={[0,-0.2,0]}
+//       onLoopEnd={onEnd}
+//       frameName={frameName}
+//       fps={24}
+//       animationNames={['stand', 'hello']}
+//       autoPlay={true}
+//       loop={true}
+//       alphaTest={0.01}
+//       // textureImageURL={video[0]}
+//       // textureDataURL={video[1]}
+//       spriteDataset={spriteObj}
+//     />
+//   );
+// }
+
+
+export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal, scroll, interactive, mq, basePath}) => {
   const mat = useLoader(TextureLoader, texture);
   mat.color = "#000000";
   // mat.encoding = THREE.sRGBEncoding;
@@ -852,13 +1009,13 @@ export const OneProduct = ({indexKey, texture, pos, setFocus,  itemTotal, scroll
 
   return (
     <group position={pos}>
-      <mesh position={[0,-0.4,0]}>
-        <planeGeometry args={[6, 6]} />
-        <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
-      </mesh>
-
-      {interactive && (
+      {interactive ? (
         <>
+          <mesh position={[0,-0.4,0]}>
+            <planeGeometry args={[6, 6]} />
+            <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
+          </mesh>
+
           <Stand hover={cursor} />
           <mesh 
             position={[0,-0.5,0.2]} 
@@ -903,6 +1060,43 @@ export const OneProduct = ({indexKey, texture, pos, setFocus,  itemTotal, scroll
             <meshBasicMaterial makeDefault visible={false} /> 
           </mesh>
         </>
+      ):(
+        <>
+          {mq ? (
+            <>
+              {video.length > 0 ? (
+                <>
+                  {/* <VideoPresenter video={video} scroll={scroll} /> */}
+                  <VideoComponent video={video} scroll={scroll} />
+                  <Video basePath={basePath} />
+                  <mesh position={[0,-2.11,0]} rotation={[(Math.PI * -0.5),0,0]}>
+                    <ringGeometry args={[0.9,1,64]} />
+                    <meshStandardMaterial color={[3,3,3]} toneMapped={false} envMapIntensity={0} />
+                  </mesh>
+                </>
+              ):(
+                <>
+                  <mesh position={[0,-0.2,0]}>
+                    <planeGeometry args={[6, 6]} />
+                    <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
+                  </mesh>
+                  <Video basePath={basePath} />
+                  <mesh position={[0,-2.11,0]} rotation={[(Math.PI * -0.5),0,0]}>
+                    <ringGeometry args={[0.9,1,64]} />
+                    <meshStandardMaterial color={[3,3,3]} toneMapped={false} envMapIntensity={0} />
+                  </mesh>
+                </>
+              )}
+            </>
+          ):(
+            <>
+              <mesh position={[0,-0.2,0]}>
+                <planeGeometry args={[6, 6]} />
+                <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
+              </mesh>
+            </>
+          )}
+        </>
       )}
     </group>
   )
@@ -932,7 +1126,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
   return (<></>)
 }
 
-export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
+export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath}) => {
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
   const roomRef = useRef();
   const scroll = useScroll();
@@ -954,28 +1148,19 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
     room_repeat_arr.push('');
   }
 
-  // alert(room_repeat_arr.length);
-
   let firstScrollSet = true;
   useFrame(() => {
     const percentRoom = (scroll.offset * mcRepeat)%1;
     roomRef.current.position.set((Math.sin((2 * Math.PI) * (percentRoom + offsetPI)) * cameraX), 0, (scroll.offset * mcDepth * mcRepeat));
-
-    // if(scroll.el.clientHeight != 0 && firstScrollSet){
-    //   firstScrollSet = false;
-
-    //   scroll.el.scroll(0, 450);
-    //   // console.log(scroll.el.clientHeight != 0 , firstScrollSet);
-    // }
   })
-  
+
   return (
     <group ref={roomRef} position={[0,0,0]}>
 
-      <OneRoom position={[0,0,mcDepth]} pic_1={pic_1} pic_2={pic_2} />
-      <OneRoom position={[0,0,0]} pic_1={pic_1} pic_2={pic_2} />
+      <OneRoom position={[0,0,mcDepth]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
+      <OneRoom position={[0,0,0]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
       {room_repeat_arr.map((item, itemKey) => (
-        <OneRoom key={itemKey} position={[0,0,-mcDepth*(itemKey+1)]} pic_1={pic_1} pic_2={pic_2} />
+        <OneRoom key={itemKey} position={[0,0,-mcDepth*(itemKey+1)]} pic_1={pic_1} pic_2={pic_2} basePath={basePath} />
       ))}
 
       {items.map((item, itemKey) => (
@@ -988,7 +1173,10 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
                 scroll={scroll}
                 itemTotal={items.length}
                 texture={item.texture} 
+                video={item.video} 
                 interactive={item.url != ""}
+                mq={mq}
+                basePath={basePath}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(product_z * (items.length - itemKey))]}
               />
 
@@ -998,7 +1186,10 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
                 scroll={scroll}
                 itemTotal={items.length}
                 texture={item.texture} 
+                video={item.video} 
                 interactive={item.url != ""}
+                mq={mq}
+                basePath={basePath}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * itemKey)]}
               />
 
@@ -1008,7 +1199,10 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
                 scroll={scroll}
                 itemTotal={items.length}
                 texture={item.texture} 
+                video={item.video} 
                 interactive={item.url != ""}
+                mq={mq}
+                basePath={basePath}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * (itemKey+items.length))]}
               />
             </>
@@ -1044,7 +1238,7 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture}) => {
   )
 }
 
-export const RoomInfinite = ({items, focus, setFocus, picture}) => {
+export const RoomInfinite = ({items, focus, setFocus, picture, basePath}) => {
   const router = useRouter();
   const [cursor, setCursor] = useState(false);
   useCursor(cursor);
@@ -1075,7 +1269,6 @@ export const RoomInfinite = ({items, focus, setFocus, picture}) => {
   }, [mq]);
 
   return (
-    // <>
     <Canvas 
       shadows={true}
       gl={{
@@ -1086,16 +1279,16 @@ export const RoomInfinite = ({items, focus, setFocus, picture}) => {
         depth: false
       }}
     >
-      <StatsGl />
+      {/* <StatsGl /> */}
 
       <motion.fog 
         attach="fog" 
         color={[1,1,1]}
         far={5}
         near={0.5}
-        initial={{far:5, near:0.5}}
+        initial={{far:1, near:0.5}}
         animate={{far:100, near:70 }}
-        transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
+        transition={{ ease:[0.33, 1, 0.68, 1], delay:2.5, duration: 3 }}
       />
       <color attach='background' args={['#ffffff']} />
       <ambientLight intensity={1.6} />
@@ -1110,12 +1303,10 @@ export const RoomInfinite = ({items, focus, setFocus, picture}) => {
         <motion.group
             initial={{ z: -20 }}
             animate={{ z: 0}}
-            transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
+            transition={{ ease:[0.33, 1, 0.68, 1], delay:2.5, duration: 3 }}
           >
           <ScrollControls infinite damping={mq ? (1):(0)} pages={count_items}>
-            {/* <Scroll> */}
-              <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} />
-            {/* </Scroll> */}
+              <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} />
           </ScrollControls>
         </motion.group>
       </Suspense>
@@ -1134,6 +1325,5 @@ export const RoomInfinite = ({items, focus, setFocus, picture}) => {
 
       <Preload all={true} />
     </Canvas>
-    // </>
   )
 }

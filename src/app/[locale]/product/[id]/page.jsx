@@ -22,11 +22,12 @@ export default async function ProductDetail({ params }) {
   const t = await getTranslations('Product');
   const productCMS = await getProductDetail(locale, params.id);
   const basePath = `${process.env.SKBT_BASEPATH}`;
+  const linkPath  = `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`;
 
   return (
     <div className='product-page'>
       {/* header */}      
-      <ProductHeader header={productCMS.cms.header} basePath={basePath} back_showroom={t('back_showroom')} />
+      <ProductHeader header={productCMS.cms.header} basePath={basePath} linkPath={linkPath} back_showroom={t('back_showroom')} />
 
       {/* sections */}
       {productCMS.cms.sections?.map((section, sectionKey) => (

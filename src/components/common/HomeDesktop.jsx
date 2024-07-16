@@ -101,7 +101,7 @@ export default function HomeDesktop({basePath, linkPath}) {
             y:-300,
             z:0,
             onComplete:function(){
-              router.push(`${linkPath}/showroom`);
+              router.push(`${linkPath}/hall`);
           }});
   
           gsap.to(scene.current, {

@@ -57,7 +57,7 @@ export default function HomeMobile({basePath, linkPath}) {
 
   return (
     <div className='home-mobile-page'>
-      <div ref={ground} className='bg-mobile'></div>
+      <div ref={ground} className='bg-mobile' style={{backgroundImage:`url(${basePath}/assets/img/home/bg-mobile.png)`}}></div>
 
       <div className='logo-kubota'>
         <img ref={logo} src={`${basePath}/assets/img/home/logo.png`} alt="logo" />
@@ -66,10 +66,10 @@ export default function HomeMobile({basePath, linkPath}) {
       <div className='box-showroom'>
         <div className='scene'>
           <div ref={bg} className='bg-showroom'>
-            <img src={`${basePath}/assets/img/home/bg-home-mobile.png"`} alt="" />
+            <img src={`${basePath}/assets/img/home/bg-home-mobile.png`} alt="" />
           </div>
 
-          <div ref={kubota1} className='kubota-1'><img src={`${basePath}/assets/img/home/kubota-1.png"`} alt="kubota" width={597} height={378} /></div>
+          <div ref={kubota1} className='kubota-1'><img src={`${basePath}/assets/img/home/kubota-1.png`} alt="kubota" width={597} height={378} /></div>
           <div ref={kubota2} className='kubota-2'><img src={`${basePath}/assets/img/home/kubota-2.png`} alt="kubota" width={384} height={336} /></div>
           <div ref={enter} className='enter'>
             <img className='arrow-1' src={`${basePath}/assets/img/home/enter.png`} alt="enter" width={51} height={90} />
@@ -95,7 +95,7 @@ export default function HomeMobile({basePath, linkPath}) {
               gsap.to(bg.current, {scale:4, x:-50, y:-200, duration:1.5, ease:'power2.in'});
 
               gsap.to(tp.current, {opacity:1, delay:0.8, duration:0.5, onComplete:function(){
-                router.push('/showroom');
+                router.push(`${linkPath}/hall`);
               }});
             }
 

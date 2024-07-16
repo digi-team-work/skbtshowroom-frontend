@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { gsap } from "gsap";
 
-export default function ProductHeader({header, basePath, back_showroom}) {
+export default function ProductHeader({header, basePath, linkPath, back_showroom}) {
   const router = useRouter();
   const productTPRef = useRef();
 
@@ -31,7 +31,7 @@ export default function ProductHeader({header, basePath, back_showroom}) {
                     gsap.fromTo(productTPRef.current, {opacity:0}, {opacity:1, duration:0.3, onComplete:function(){
                       window.scrollTo(0,0);
                       // router.back();
-                      router.push('/showroom');
+                      router.push(linkPath+'/hall');
                     }});
                     
                   }}
