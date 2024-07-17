@@ -15,6 +15,20 @@ body {
   overscroll-behavior: contain;
 }
 
+body * {
+  &::-webkit-scrollbar {
+    @apply w-[4px];
+  }
+  
+  &::-webkit-scrollbar-track {
+    @apply bg-c-gray-800;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    @apply bg-c-orange-500;
+  }
+}
+
 .touch-overscroll {
   height: 100vh;
 
