@@ -36,7 +36,7 @@ export default function ShowroomInfinity({items, picture, basePath}) {
     <>
       <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} />
 
-      <div className='flex justify-center items-center fixed left-0 bottom-0 w-full h-auto pointer-events-none select-none z-[90] p-4 bg-gradient-to-b from-black/0 to-black/50'>
+      <div className='hidden lg:flex justify-center items-center fixed left-0 bottom-0 w-full h-auto pointer-events-none select-none z-[90] p-4 bg-gradient-to-b from-black/0 to-black/50'>
         <div className='grid grid-cols-2 gap-10 text-lg lg:text-xl  leading-[10px] text-center text-white'>
           <div>
           <div className='block relative mx-auto my-4 w-6 h-10 border border-white rounded-full'>
