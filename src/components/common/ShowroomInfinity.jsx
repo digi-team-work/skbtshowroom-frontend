@@ -71,7 +71,7 @@ export default function ShowroomInfinity({items, picture, basePath}) {
                 />
               </svg>
 
-              <div className='text-3xl font-bold'>LOADING</div>
+              <div className='text-3xl font-bold'>กำลังโหลด</div>
             </div>
 
             {/*

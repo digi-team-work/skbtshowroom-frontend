@@ -22,12 +22,13 @@ export default function HomeDesktop({basePath, linkPath}) {
     // default
     // setSceneScale(ww >= 1024);
     // console.log("w : "+ww/1920 +", h : "+wh/1080);
-    if((ww/1920) > 1 || (wh/1080) > 1){
+
+    // if((ww/1920) > 1 || (wh/1080) > 1){
       newScale = (ww/1920) > (wh/1080) ? (ww/1920):(wh/1080);
       // console.log(newScale);
       gsap.set(anchorRef.current, {scale:newScale});
       setSceneScale(newScale);
-    }
+    // }
 
     function w_resize(e){
       if(ww != window.innerWidth){
@@ -36,12 +37,13 @@ export default function HomeDesktop({basePath, linkPath}) {
         // change view
         // sceneScale(ww >= 1024);
         // console.log("w : "+ww/1920 +", h : "+wh/1080);
-        if((ww/1920) > 1 || (wh/1080) > 1){
+        
+        // if((ww/1920) > 1 || (wh/1080) > 1){
           newScale = (ww/1920) > (wh/1080) ? (ww/1920):(wh/1080);
           // console.log(newScale);
           gsap.set(anchorRef.current, {scale:newScale});
           setSceneScale(newScale);
-        }
+        // }
       }
     }
     
