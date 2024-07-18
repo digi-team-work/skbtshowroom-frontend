@@ -80,14 +80,16 @@ export default async function HallPage() {
   let items = [];
   productList.products.map((item, itemKey) => {
     if(item.type == "product"){
-      items.push({
-        id:item.id,
-        type : item.type,
-        title:"",
-        texture:item.image_showroom,
-        video:[],
-        url:`${linkPath}/product/${item.id}`
-      });
+      if(item.image_showroom){
+        items.push({
+          id:item.id,
+          type : item.type,
+          title:"",
+          texture:item.image_showroom,
+          video:[],
+          url:`${linkPath}/product/${item.id}`
+        });
+      }
     }else if(item.type == "person") {
       items.push({
         id:item.id,
@@ -101,6 +103,7 @@ export default async function HallPage() {
         url:`${linkPath}/product/${item.id}`
       });
     }
+
   });
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
   const presenter = productList.products.find((item, itemKey) => item.type == 'person');
