@@ -131,7 +131,7 @@ export default async function HallPage() {
           item.person.person_video_rgb ? (item.person.person_video_rgb):(''), 
           item.person.person_video_alpha ? (item.person.person_video_alpha):('')
         ],
-        url:`${linkPath}/product/${item.id}`
+        url:``
       });
     }
   });
