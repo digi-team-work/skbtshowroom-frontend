@@ -147,7 +147,7 @@ export default async function HallPage() {
     });
   }
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
-  const presenter = productList.products.find((item, itemKey) => item.type == 'person');
+  const presenter = items.find((item, itemKey) => item.type == 'person');
 
   return (
     <ShowroomInfinity items={items} basePath={basePath} picture={picture} presenter={presenter} />
