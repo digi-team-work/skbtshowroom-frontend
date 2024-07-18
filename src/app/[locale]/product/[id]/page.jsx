@@ -44,8 +44,14 @@ export default async function ProductDetail({ params }) {
             <div className='section-banner'>
               {section.banner_type === "image" ? (
                 <picture>
-                  <source media="(min-width:1024px)" srcSet={`${section.image_desktop}`} />
-                  <img src={`${section.image_mobile}`} alt='banner'  />
+                  {section.image_background_desktop && (<source media="(min-width:1024px)" srcSet={`${section.image_background_desktop}`} />)}
+                  {section.image_background_mobile ? (
+                    <img src={`${section.image_background_mobile}`} alt='image'  />
+                  ):(
+                    <>
+                      {section.image_background_desktop && (<img src={`${section.image_background_desktop}`} alt='image'  />)}
+                    </>
+                  )}
                 </picture>
               ):(
                 <ProductVideoBanner video_id={section.image_desktop} uuid={`${Math.floor(Math.random() * 9999999999)}`} /> 
