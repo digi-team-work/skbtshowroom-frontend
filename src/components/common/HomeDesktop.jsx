@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { gsap } from "gsap";
 
-export default function HomeDesktop({basePath, linkPath}) {
+export default function HomeDesktop({basePath, linkPath, video}) {
   const router = useRouter();
   const [start, setStart] = useState(false);
   const anchorRef = useRef();
@@ -154,7 +154,8 @@ export default function HomeDesktop({basePath, linkPath}) {
 
             <div className='frame-video'>
               <video width="320" height="240" autoPlay playsInline muted loop>
-                <source src={`${basePath}/assets/video/home.mp4`} type="video/mp4" />
+                {/* <source src={`${basePath}/assets/video/home.mp4`} type="video/mp4" /> */}
+                <source src={`${video}`} type="video/mp4" />
               </video>
             </div>
           </div>

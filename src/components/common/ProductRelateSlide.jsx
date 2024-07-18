@@ -30,7 +30,7 @@ export default function ProductRelateSlide({items=[
       {items.length == 1 ? (
         <div className='one-item only-one'>
           <div className='thumbnail'>
-            <img src={items[0].thumbnail} alt="thumbnail" />
+            {items[0].thumbnail && (<img src={items[0].thumbnail} alt="thumbnail" />)}
           </div>
 
           <div className='content'>
@@ -72,7 +72,7 @@ export default function ProductRelateSlide({items=[
             <SplideSlide key={itemKey}>
               <div className='one-item'>
                 <div className='thumbnail'>
-                  <img src={item.thumbnail} alt="thumbnail" />
+                  {item.thumbnail && (<img src={item.thumbnail} alt="thumbnail" />)}
                 </div>
 
                 <div className='content'>

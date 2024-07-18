@@ -6,7 +6,7 @@ import HomeDesktop from "@/components/common/HomeDesktop";
 import HomeMobile from '@/components/common/HomeMobile';
 
 
-export default function HomeClient({basePath, linkPath}) {
+export default function HomeClient({basePath, linkPath, video}) {
   const [init, setInit] = useState(false);
   const [mq, setMQ] = useState(false);
 
@@ -34,7 +34,7 @@ export default function HomeClient({basePath, linkPath}) {
     <>
       {init && (
         <>
-          {mq ? (<HomeDesktop basePath={basePath} linkPath={linkPath} />):(<HomeMobile basePath={basePath} linkPath={linkPath} />)}
+          {mq ? (<HomeDesktop basePath={basePath} linkPath={linkPath} video={video} />):(<HomeMobile basePath={basePath} linkPath={linkPath} />)}
         </>
       )}
     </>

@@ -4,10 +4,9 @@ import '@/styles/home.css'
 import '@/styles/product.css'
 import '@/styles/r3f.css'
 
-export const metadata = {
-  title: 'Kubota Showroom',
-  description: 'Kubota Showroom',
-}
+import { MetadataDefault } from "@/lib/metadata";
+
+export const metadata = MetadataDefault;
 
 export default function RootLayout({ children, params: { locale } }) {
   return (
