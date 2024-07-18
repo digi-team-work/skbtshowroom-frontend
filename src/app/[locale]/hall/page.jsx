@@ -136,6 +136,13 @@ export default async function HallPage() {
     }
   });
 
+  // switch pos
+  if(items.length != 0){
+    let itemFirst = items.shift();
+    items.push(itemFirst);
+  }
+
+  // add space
   if(items.length%2 > 0){
     items.push({
       id:-1,
