@@ -103,8 +103,18 @@ export default async function HallPage() {
         url:`${linkPath}/product/${item.id}`
       });
     }
-
   });
+
+  if(items.length%2 > 0){
+    items.push({
+      id:-1,
+      type : 'space',
+      title:"",
+      texture:"",
+      video:[],
+      url:""
+    });
+  }
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
   const presenter = productList.products.find((item, itemKey) => item.type == 'person');
 
