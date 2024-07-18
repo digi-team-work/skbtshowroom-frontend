@@ -138,8 +138,8 @@ export default async function HallPage() {
 
   // switch pos
   if(items.length != 0){
-    let itemFirst = items.shift();
-    items.push(itemFirst);
+    let itemFirst = items.pop();
+    items.unshift(itemFirst);
   }
 
   // add space
