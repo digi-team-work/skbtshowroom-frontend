@@ -125,10 +125,10 @@ export default async function HallPage() {
         id:item.id,
         type : item.type,
         title:"",
-        texture:item.person_image,
+        texture:item.person.person_image,
         video:[
-          (item.person_video ? (item.person_video):('')), 
-          (item.person_video ? (item.person_video):(''))
+          (item.person.person_video_rgb ? (item.person.person_video_rgb):('')), 
+          (item.person.person_video_alpha ? (item.person.person_video_alpha):(''))
         ],
         url:`${linkPath}/product/${item.id}`
       });
