@@ -37,18 +37,29 @@ export default function ProductRelateSlide({items=[
             <div>
               <h4>{items[0].title}</h4>
               <div className='list-feature'>
-                {items[0].features?.map((feature, featureKey) => (
+                {/* {items[0].features?.map((feature, featureKey) => (
                   <div key={`feature-${featureKey}`} className='one-feature'>
                     <div>{feature.label}</div>
                     <div className={`${feature.class}`}><span>{feature.value} </span> {feature.unit}</div>
                   </div>
-                ))}
+                ))} */}
+
+                <div className='one-feature'>
+                  <div>แรงม้า</div>
+                  <div><span>{items[0].horsepower} </span> แรงม้า</div>
+                </div>
+
+                <div className='one-feature'>
+                  <div>ราคาเริ่มต้น</div>
+                  <div className="price-value"><span>{parseFloat(items[0].price).toLocaleString('th-TH')} </span> บาท</div>
+                </div>
+
               </div>
             </div>
           </div>
 
           <div className='box-btn'>
-            <a className='btn-style-4' href="#">ดูรายละเอียด</a>
+            <a className='btn-style-4' href={items[0].permalink}>ดูรายละเอียด</a>
           </div>
         </div>
       ):(
@@ -79,18 +90,27 @@ export default function ProductRelateSlide({items=[
                   <div>
                     <h4>{item.title}</h4>
                     <div className='list-feature'>
-                      {item.features?.map((feature, featureKey) => (
+                      {/* {item.features?.map((feature, featureKey) => (
                         <div key={`feature-${featureKey}`} className='one-feature'>
                           <div>{feature.label}</div>
                           <div className={`${feature.class}`}><span>{feature.value} </span> {feature.unit}</div>
                         </div>
-                      ))}
+                      ))} */}
+                      <div className='one-feature'>
+                        <div>แรงม้า</div>
+                        <div><span>{item.horsepower} </span> แรงม้า</div>
+                      </div>
+
+                      <div className='one-feature'>
+                        <div>ราคาเริ่มต้น</div>
+                        <div className="price-value"><span>{parseFloat(item.price).toLocaleString('th-TH')} </span> บาท</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className='box-btn'>
-                  <a className='btn-style-4' href="#">ดูรายละเอียด</a>
+                  <a className='btn-style-4' href={item.permalink}>ดูรายละเอียด</a>
                 </div>
               </div>
             </SplideSlide>

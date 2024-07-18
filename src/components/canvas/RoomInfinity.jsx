@@ -898,8 +898,11 @@ export const fragmentShader = `
 `;
 
 export const VideoComponent = ({indexKey, itemTotal, scroll, videoPresenterRef, videoPresenterAlphaRef}) => {
-  const divOffset = 1/itemTotal * 0.7;
   const sOffset = indexKey/itemTotal;
+  const divOffset = indexKey == 0 ? ((1/itemTotal * 0.7) - 1):(1/itemTotal * 0.7);
+
+  // console.log(sOffset - divOffset);
+
   const [countHi, setCountHi] = useState(0);
   // const [video_presenter] = useState(() => Object.assign(
   //   document.createElement('video'), 
