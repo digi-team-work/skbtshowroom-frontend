@@ -409,7 +409,7 @@
       }
 
       .one-item {
-        @apply block w-[165px] h-[98px] relative cursor-pointer overflow-hidden rounded-md;
+        @apply block w-[165px] h-[98px] relative cursor-pointer overflow-hidden rounded-md bg-c-gray-200;
 
         img {
           @apply block w-full h-full object-cover;

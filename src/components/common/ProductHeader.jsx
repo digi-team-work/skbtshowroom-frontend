@@ -24,27 +24,24 @@ export default function ProductHeader({header, basePath, linkPath, back_showroom
         <div className='container'>
           <div className='main-menu'>
             <div className='mobile-top'>
-              {header.back && (
-                <a 
-                  className='btn-style-1 cursor-pointer'
-                  onClick={() => {
-                    gsap.fromTo(productTPRef.current, {opacity:0}, {opacity:1, duration:0.3, onComplete:function(){
-                      window.scrollTo(0,0);
-                      // router.back();
-                      router.push(linkPath+'/hall');
-                    }});
-                    
-                  }}
-                >
-                  <img src={`${basePath}/assets/img/icon/back.svg`} alt={`${back_showroom}`} />
-                  {back_showroom}
-                </a>
-              )}
+              <a 
+                className='btn-style-1 cursor-pointer'
+                onClick={() => {
+                  gsap.fromTo(productTPRef.current, {opacity:0}, {opacity:1, duration:0.3, onComplete:function(){
+                    window.scrollTo(0,0);
+                    // router.back();
+                    router.push(linkPath+'/hall');
+                  }});
+                }}
+              >
+                <img src={`${basePath}/assets/img/icon/back.svg`} alt={`${back_showroom}`} />
+                {back_showroom}
+              </a>
             </div>
 
             <div className='mobile-bottom'>
-              {header.lists?.map((item, itemKey) => (
-                <a key={`header-menu-${itemKey}`} className='one-menu' href={`${item.link.href}`} target={`${item.link.target}`}>
+              {header?.map((item, itemKey) => (
+                <a key={`header-menu-${itemKey}`} className='one-menu' href={`${item.link.url}`} target={`${item.link.target}`}>
                   <img src={`${item.icon}`} alt={`${item.title}`} />
                   {item.title}
                 </a>

@@ -12,11 +12,22 @@ export default function ProductVideoBanner({
   const ref_ytbanner = useRef();
   const uuid_ytbanner = `ytbanner_${uuid}`;
 
+  function fn_get_ytid(_url){
+    let ytid = _url.trim();
+    ytid = ytid.replace('https://youtu.be/','');
+    ytid = ytid.replace('https://www.youtube.com/watch?v=','');
+    ytid = ytid.split('&')[0];
+    ytid = ytid.split('?')[0];
+
+    return ytid;
+  }
+
   function fn_ytbanner_next_play(){
     let ytvideo = new YT.Player(uuid_ytbanner, {
       height: '360',
       width: '640',
-      videoId: video_id,
+      // videoId: video_id,
+      videoId: fn_get_ytid(video_id),
       playerVars: {
         'playsinline': 1
       },
@@ -52,7 +63,8 @@ export default function ProductVideoBanner({
         let ytvideo = new YT.Player(uuid_ytbanner, {
           height: '360',
           width: '640',
-          videoId: video_id,
+          // videoId: video_id,
+          videoId: fn_get_ytid(video_id),
           playerVars: {
             'playsinline': 1
           },
@@ -80,7 +92,8 @@ export default function ProductVideoBanner({
         <iframe 
           ref={ref_ytbanner}
           id={uuid_ytbanner}
-          src={`https://www.youtube.com/embed/${video_id}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
+          // src={`https://www.youtube.com/embed/${video_id}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
+          src={`https://www.youtube.com/embed/${fn_get_ytid(video_id)}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
           allow='autoplay; encrypted-media'
           allowFullScreen
           title='video'

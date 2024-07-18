@@ -19,12 +19,10 @@ export default function ProductModalSlide({items=[
     thumbnail : "/assets/img/product/product-section-2-1.png",
     title : "1 ระบบปรับอากาศ",
     excerpt : "ช่องแอร์ปรับทิศทางแบบ 360 องศา 4 ช่อง ปรับความแรงลมได้ 4 ระดับ",
-    detail : "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
-    style:{},
-    readmore:{
-      visible : true,
-      style:{}
-    }
+    description : "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+    background_color:"White",
+    title_color:"Black",
+    excerpt_color:"Black"
   }
 ]}) {
   return (
@@ -44,34 +42,48 @@ export default function ProductModalSlide({items=[
       {items?.map((item, itemKey) => (
         <SplideSlide key={`product-slide-${itemKey}`}>
           <div 
-            className={`one-item ${item.thumbnail == "" && 'not-thumbnail'} ${item.readmore.visible && 'has-detail'}`}
-            style={item.style}
+            className={`one-item ${!(item.thumbnail && item.thumbnail != "") && 'not-thumbnail'} ${item.description && 'has-detail'}`}
+            style={{
+              backgroundColor: item.background_color ? (item.background_color):('inherit') 
+            }}
           >
-            {item.thumbnail != "" && (
+            {(item.thumbnail && item.thumbnail != "") && (
               <div className='thumbnail'>
                 <img src={item.thumbnail} alt="thumbnail" />
               </div>
             )}
             <div className='content'>
               <div>
-                <h4>{item.title}</h4>
-                <p>{item.excerpt}</p>
+                <h4 style={{
+                  color: item.title_color ? (item.title_color):('inherit')
+                }}>{item.title}</h4>
+                <p style={{
+                  color: item.excerpt_color ? (item.excerpt_color):('inherit')
+                }}>{item.excerpt}</p>
               </div>
             </div>
 
-            {item.readmore.visible && (
+            {item.description && (
               <>
                 <div 
                   className='readmore'
-                  style={item.readmore.style}
-                ><span></span></div>
+                  style={{
+                    backgroundColor: item.button_color ? (item.button_color):('inherit') 
+                  }}
+                >
+                  <span
+                    style={{
+                      backgroundColor: item.text_color ? (item.text_color):('inherit') 
+                    }}
+                  ></span>
+                </div>
 
                 <Dialog>
                   <DialogTrigger className='hit'></DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>{item.title}</DialogTitle>
-                      <DialogDescription>{item.detail}</DialogDescription>
+                      <DialogDescription>{item.description}</DialogDescription>
                     </DialogHeader>
                   </DialogContent>
                 </Dialog>

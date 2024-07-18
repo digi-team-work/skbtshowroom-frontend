@@ -19,13 +19,24 @@ export default function ProductVideoListing({
   const SplideRef = useRef();
   const [nowPlay, setNowPlay] = useState(0);
 
+  function fn_get_ytid(_url){
+    let ytid = _url.trim();
+    ytid = ytid.replace('https://youtu.be/','');
+    ytid = ytid.replace('https://www.youtube.com/watch?v=','');
+    ytid = ytid.split('&')[0];
+    ytid = ytid.split('?')[0];
+
+    return ytid;
+  }
+
   function fn_yt_next_play(_key){
     setNowPlay(_key);
 
     let ytvideo = new YT.Player(uuid_ytplayer, {
       height: '360',
       width: '640',
-      videoId: listing[_key].video_id,
+      // videoId: listing[_key].video_id,
+      videoId: fn_get_ytid(listing[_key].video_url),
       playerVars: {
         'playsinline': 1
       },
@@ -72,7 +83,8 @@ export default function ProductVideoListing({
         let ytvideo = new YT.Player(uuid_ytplayer, {
           height: '360',
           width: '640',
-          videoId: listing[nowPlay].video_id,
+          // videoId: listing[nowPlay].video_id,
+          videoId: fn_get_ytid(listing[nowPlay].video_url),
           playerVars: {
             'playsinline': 1
           },
@@ -116,8 +128,11 @@ export default function ProductVideoListing({
         <iframe 
           ref={ref_ytplayer}
           id={uuid_ytplayer}
-          data-videoid={listing[nowPlay].video_id}
-          src={`https://www.youtube.com/embed/${listing[nowPlay].video_id}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
+          // data-videoid={listing[nowPlay].video_id}
+          // src={`https://www.youtube.com/embed/${listing[nowPlay].video_id}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
+          
+          data-videoid={fn_get_ytid(listing[nowPlay].video_url)}
+          src={`https://www.youtube.com/embed/${fn_get_ytid(listing[nowPlay].video_url)}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&info=0`}
           allow='autoplay; encrypted-media'
           allowFullScreen
           title='video'
@@ -164,7 +179,9 @@ export default function ProductVideoListing({
                     SplideRef.current.splide.go(itemKey);
                   }}
                 >
-                  <img src={item.poster} alt="thumbnail" />
+                  {item.poster && (
+                    <img src={item.poster} alt="thumbnail" />
+                  )}
                 </div>
               </SplideSlide>
             ))}

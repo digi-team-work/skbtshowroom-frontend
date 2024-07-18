@@ -29,10 +29,12 @@ export const Ground = ({room_depth, pos}) => {
   //   normal.encoding = LinearEncoding;
   // }, [normal]);
 
+  const min_depth = 160;
+
   return (
     <group position={pos}>
       <mesh position={[0,0,0]} rotation={[-(Math.PI*0.5),0,0]}>
-        <planeGeometry args={[20, room_depth]} />
+        <planeGeometry args={[20, (room_depth >= min_depth ? (room_depth):(min_depth))]} />
         <MeshReflectorMaterial
           envMapIntensity={0}
           dithering={true}
@@ -853,10 +855,15 @@ export const Stand = ({hover}) => {
   )
 }
 
-export const Video = ({basePath}) => {
+export const Video = ({bgVideoRef}) => {
   const particle = useRef();
-  const [video] = useState(() => Object.assign(document.createElement('video'), { src: basePath+'/bg-presenter.mp4', crossOrigin: 'Anonymous', loop: true, playsinline:true, muted: true }))
-  useEffect(() => void video.play(), [video])
+  // const [video] = useState(() => Object.assign(document.createElement('video'), { src: basePath+'/bg-presenter.mp4', crossOrigin: 'Anonymous', loop: true, playsinline:true, muted: true }))
+  // useEffect(() => void video.play(), [video])
+
+  const [video] = useState(bgVideoRef.current);
+  useEffect(() => {
+    video.play();
+  }, [video])
 
   useFrame(() => {
     particle.current.rotation.y += 0.001;
@@ -890,23 +897,35 @@ export const fragmentShader = `
     }
 `;
 
-export const VideoComponent = ({video, scroll}) => {
+export const VideoComponent = ({indexKey, itemTotal, scroll, videoPresenterRef, videoPresenterAlphaRef}) => {
+  const divOffset = 1/itemTotal * 0.7;
+  const sOffset = indexKey/itemTotal;
   const [countHi, setCountHi] = useState(0);
-  const [video_presenter] = useState(() => Object.assign(
-    document.createElement('video'), 
-    { src: video[0], crossOrigin: 'Anonymous', controls : true, loop: false, playsinline:true, muted: true 
-  }))
+  // const [video_presenter] = useState(() => Object.assign(
+  //   document.createElement('video'), 
+  //   { src: video[0], crossOrigin: 'Anonymous', controls : true, loop: false, playsinline:true, muted: true 
+  // }))
   // useEffect(() => void video_presenter.play(), [video_presenter])
+
+  // console.log((sOffset - divOffset), scroll.offset);
+
+  const [video_presenter] = useState(videoPresenterRef.current);
+  const [video_presenter_alpha] = useState(videoPresenterAlphaRef.current);
+
+  useEffect(() => void video_presenter.play(), [video_presenter])
+  useEffect(() => void video_presenter_alpha.play(), [video_presenter_alpha])
 
   useFrame(() => {
     // console.log(scroll.offset, frameName);
-    if(scroll.offset >= 0.9){
+    // if(scroll.offset >= 0.9){
+    if(scroll.offset >= (sOffset - divOffset)){
       if (countHi == 0) {
         // if(video_presenter.ended){
         //   video_presenter.currentTime = 0;
         // }
 
         video_presenter.play();
+        video_presenter_alpha.play()
         setCountHi(countHi+1);
       }
     }else {
@@ -929,6 +948,7 @@ export const VideoComponent = ({video, scroll}) => {
       <planeGeometry args={[6, 6]} />
       <meshBasicMaterial toneMapped={false} color={[1,1,1]} transparent={true}> 
         <videoTexture attach="map" color="#000000" args={[video_presenter]} encoding={sRGBEncoding} />
+        <videoTexture attach="alphaMap" color="#ffffff" args={[video_presenter_alpha]} encoding={sRGBEncoding} />
       </meshBasicMaterial>
 
       {/* 
@@ -998,7 +1018,7 @@ export const VideoComponent = ({video, scroll}) => {
 // }
 
 
-export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal, scroll, interactive, mq, basePath}) => {
+export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal, scroll, interactive, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const mat = useLoader(TextureLoader, texture);
   mat.color = "#000000";
   // mat.encoding = THREE.sRGBEncoding;
@@ -1062,40 +1082,19 @@ export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal,
         </>
       ):(
         <>
-          {mq ? (
-            <>
-              {video.length > 0 ? (
-                <>
-                  {/* <VideoPresenter video={video} scroll={scroll} /> */}
-                  <VideoComponent video={video} scroll={scroll} />
-                  <Video basePath={basePath} />
-                  <mesh position={[0,-2.11,0]} rotation={[(Math.PI * -0.5),0,0]}>
-                    <ringGeometry args={[0.9,1,64]} />
-                    <meshStandardMaterial color={[3,3,3]} toneMapped={false} envMapIntensity={0} />
-                  </mesh>
-                </>
-              ):(
-                <>
-                  <mesh position={[0,-0.2,0]}>
-                    <planeGeometry args={[6, 6]} />
-                    <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
-                  </mesh>
-                  <Video basePath={basePath} />
-                  <mesh position={[0,-2.11,0]} rotation={[(Math.PI * -0.5),0,0]}>
-                    <ringGeometry args={[0.9,1,64]} />
-                    <meshStandardMaterial color={[3,3,3]} toneMapped={false} envMapIntensity={0} />
-                  </mesh>
-                </>
-              )}
-            </>
+          {video.length > 0 ? (
+            <VideoComponent indexKey={indexKey} itemTotal={itemTotal} scroll={scroll} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           ):(
-            <>
-              <mesh position={[0,-0.2,0]}>
-                <planeGeometry args={[6, 6]} />
-                <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
-              </mesh>
-            </>
+            <mesh position={[0,-0.2,0]}>
+              <planeGeometry args={[6, 6]} />
+              <meshBasicMaterial makeDefault map={mat} transparent={true} depthTest={false} />
+            </mesh>
           )}
+          <Video bgVideoRef={bgVideoRef} />
+          <mesh position={[0,-2.11,0]} rotation={[(Math.PI * -0.5),0,0]}>
+            <ringGeometry args={[0.9,1,64]} />
+            <meshStandardMaterial color={[3,3,3]} toneMapped={false} envMapIntensity={0} />
+          </mesh>
         </>
       )}
     </group>
@@ -1126,7 +1125,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
   return (<></>)
 }
 
-export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath}) => {
+export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
   const roomRef = useRef();
   const scroll = useScroll();
@@ -1177,6 +1176,9 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 interactive={item.url != ""}
                 mq={mq}
                 basePath={basePath}
+                bgVideoRef={bgVideoRef}
+                videoPresenterRef={videoPresenterRef} 
+                videoPresenterAlphaRef={videoPresenterAlphaRef}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(product_z * (items.length - itemKey))]}
               />
 
@@ -1190,6 +1192,9 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 interactive={item.url != ""}
                 mq={mq}
                 basePath={basePath}
+                bgVideoRef={bgVideoRef}
+                videoPresenterRef={videoPresenterRef} 
+                videoPresenterAlphaRef={videoPresenterAlphaRef}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * itemKey)]}
               />
 
@@ -1203,6 +1208,9 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 interactive={item.url != ""}
                 mq={mq}
                 basePath={basePath}
+                bgVideoRef={bgVideoRef}
+                videoPresenterRef={videoPresenterRef} 
+                videoPresenterAlphaRef={videoPresenterAlphaRef}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * (itemKey+items.length))]}
               />
             </>
@@ -1238,7 +1246,7 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
   )
 }
 
-export const RoomInfinite = ({items, focus, setFocus, picture, basePath}) => {
+export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const router = useRouter();
   const [cursor, setCursor] = useState(false);
   useCursor(cursor);
@@ -1305,8 +1313,8 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath}) => {
             animate={{ z: 0}}
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
-          <ScrollControls infinite damping={mq ? (1):(0)} pages={count_items}>
-              <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} />
+          <ScrollControls infinite damping={mq ? (2):(0)} distance="2" pages={count_items}>
+              <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
       </Suspense>

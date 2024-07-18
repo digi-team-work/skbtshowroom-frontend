@@ -8,12 +8,15 @@ import { gsap } from "gsap";
 
 const RoomInfinite = dynamic(() => import('@/components/canvas/RoomInfinity').then((mod) => mod.RoomInfinite), { ssr: false });
 
-export default function ShowroomInfinity({items, picture, basePath}) {
+export default function ShowroomInfinity({items, picture, basePath, presenter}) {
   const [firstTime, setFirstTime] = useState(true);
   const [howto, setHowto] = useState(true);
   const [itemFocus, setItemFocus] = useState(-1);
-  const transitionPageRef = useRef();
   const router = useRouter();
+  const transitionPageRef = useRef();
+  const bgVideoRef = useRef();
+  const videoPresenterRef = useRef();
+  const videoPresenterAlphaRef = useRef();
 
   useEffect(() => {
     if(itemFocus != -1){
@@ -34,7 +37,26 @@ export default function ShowroomInfinity({items, picture, basePath}) {
 
   return (
     <>
-      <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} />
+      <div className='block invisible absolute left-0 top-0 w-1 h-0 overflow-hidden'>
+        <video ref={bgVideoRef} src={`${basePath}/bg-presenter.mp4`} controls={true} muted={true} playsInline={true} autoPlay={true} loop={true} crossOrigin={`anonymous`} />
+
+        {presenter && (
+          <>
+            {presenter.video.length > 0 && (
+              <>
+                {presenter.video[0] != '' && (
+                  <video ref={videoPresenterRef} src={presenter.video[0]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} crossOrigin={`anonymous`} />
+                )}
+                {presenter.video[1] != '' && (
+                  <video ref={videoPresenterAlphaRef} src={presenter.video[1]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} crossOrigin={`anonymous`} />
+                )}
+              </>
+            )}
+          </>
+        )}
+      </div>
+
+      <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
 
       <div className='hidden lg:flex justify-center items-center fixed left-0 bottom-0 w-full h-auto pointer-events-none select-none z-[90] p-4 bg-gradient-to-b from-black/0 to-black/50'>
         <div className='grid grid-cols-2 gap-10 text-lg lg:text-xl  leading-[10px] text-center text-white'>
@@ -73,31 +95,6 @@ export default function ShowroomInfinity({items, picture, basePath}) {
 
               <div className='text-3xl font-bold'>กำลังโหลด</div>
             </div>
-
-            {/*
-            <hr className='border-t-[3px] border-dotted my-10' />
-
-            <div className='grid grid-cols-2 gap-4 text-lg lg:text-xl font-medium leading-[10px] text-center'>
-              <div>
-                <div className='leading-none'>
-                  <b>MAC</b> <br />SCROLL UP
-                </div>
-                <div className='block relative mx-auto my-4 w-8 h-14 border-[3px] border-black rounded-full'>
-                  <span className='block absolute left-0 right-0 top-2 mx-auto w-[3px] h-3 rounded-full bg-black'></span>
-                </div>
-              </div>
-
-              <div>
-                <div className='leading-none'>
-                  <b>WINDOW</b> <br />SCROLL DOWN
-                </div>
-                <div className='block relative mx-auto my-4 w-8 h-14 border-[3px] border-black rounded-full'>
-                  <span className='block absolute left-0 right-0 bottom-2 mx-auto w-[3px] h-3 rounded-full bg-black'></span>
-                </div>
-              </div>
-            </div> 
-            */}
-
           </div>
         )}
       </div>
