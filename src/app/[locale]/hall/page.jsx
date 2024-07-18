@@ -57,7 +57,8 @@ export default async function HallPage() {
       title : "presenter", 
       texture : basePath+"/product/presenter.png",
       // video : [basePath+"/product/presenter.webm"],
-      video : [basePath+"/product/presenter.mp4", basePath+"/product/presenter-alpha.mp4"],
+      // video : [basePath+"/product/presenter.mp4", basePath+"/product/presenter-alpha.mp4"],
+      video : ["https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter.mp4", "https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter-alpha-1.mp4"],
       // video : [],
       url : ""
     },
