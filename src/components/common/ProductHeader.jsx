@@ -40,12 +40,16 @@ export default function ProductHeader({header, basePath, linkPath, back_showroom
             </div>
 
             <div className='mobile-bottom'>
-              {header?.map((item, itemKey) => (
-                <a key={`header-menu-${itemKey}`} className='one-menu' href={`${item.link.url}`} target={`${item.link.target}`}>
-                  <img src={`${item.icon}`} alt={`${item.title}`} />
-                  {item.title}
-                </a>
-              ))}
+              {header && (
+                <>
+                  {header?.map((item, itemKey) => (
+                    <a key={`header-menu-${itemKey}`} className='one-menu' href={`${item.link.url}`} target={`${item.link.target}`}>
+                      <img src={`${item.icon}`} alt={`${item.title}`} />
+                      {item.title}
+                    </a>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>
