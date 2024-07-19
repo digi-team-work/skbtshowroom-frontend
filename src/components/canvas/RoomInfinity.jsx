@@ -1316,7 +1316,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
             animate={{ z: 0}}
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
-          <ScrollControls infinite damping={mq ? (2):(0)} distance="2" pages={count_items}>
+          <ScrollControls infinite damping={mq ? (2):(0)} pages={count_items}>
               <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
