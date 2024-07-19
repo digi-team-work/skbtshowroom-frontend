@@ -85,7 +85,7 @@ export default async function ProductDetail({ params }) {
                   )}
                 </picture>
               ):(
-                <ProductVideoBanner video_id={section.image_desktop} uuid={`${Math.floor(Math.random() * 9999999999)}`} /> 
+                <ProductVideoBanner video_id={section.image_background_desktop} uuid={`${Math.floor(Math.random() * 9999999999)}`} /> 
               )}
             </div>
           )}
