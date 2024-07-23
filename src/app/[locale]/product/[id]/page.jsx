@@ -96,7 +96,7 @@ export default async function ProductDetail({ params }) {
               className='section-1'
               style={{
                 backgroundColor: section.background_color ? (section.background_color):('inherit'), 
-                backgroundImage: section.background_image ? (section.background_image):('none'), 
+                backgroundImage: section.background_image ? (`url(${section.background_image})`):('none'), 
                 backgroundPosition: section.background_position ? (section.background_position):('left top'), 
                 backgroundSize: section.background_size ? (section.background_size):('auto auto'), 
                 backgroundRepeat: section.background_repeat ? (section.background_repeat):('repeat')
@@ -166,7 +166,7 @@ export default async function ProductDetail({ params }) {
               className='section-2'
               style={{
                 backgroundColor: section.background_color ? (section.background_color):('inherit'), 
-                backgroundImage: section.background_image ? (section.background_image):('none'), 
+                backgroundImage: section.background_image ? (`url(${section.background_image})`):('none'), 
                 backgroundPosition: section.background_position ? (section.background_position):('left top'), 
                 backgroundSize: section.background_size ? (section.background_size):('auto auto'), 
                 backgroundRepeat: section.background_repeat ? (section.background_repeat):('repeat')
