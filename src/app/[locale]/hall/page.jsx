@@ -57,8 +57,8 @@ export default async function HallPage() {
   //     title : "presenter", 
   //     texture : basePath+"/product/presenter.png",
   //     // video : [basePath+"/product/presenter.webm"],
-  //     // video : [basePath+"/product/presenter.mp4", basePath+"/product/presenter-alpha.mp4"],
-  //     video : ["https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter.mp4", "https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter-alpha-1.mp4"],
+  //     video : [basePath+"/product/presenter.mp4", basePath+"/product/presenter-alpha.mp4"],
+  //     // video : ["https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter.mp4", "https://skbt-main.digi-team.work/onlineshowroom-backend/wp-content/uploads/2024/07/presenter-alpha-1.mp4"],
   //     // video : [],
   //     url : ""
   //   },
@@ -155,8 +155,9 @@ export default async function HallPage() {
   }
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
   const presenter = items.find((item, itemKey) => item.type == 'person');
+  const audioClick = productList.sound_showroom;
 
   return (
-    <ShowroomInfinity items={items} basePath={basePath} picture={picture} presenter={presenter} />
+    <ShowroomInfinity items={items} basePath={basePath} picture={picture} presenter={presenter} audioClick={audioClick} />
   )
 }

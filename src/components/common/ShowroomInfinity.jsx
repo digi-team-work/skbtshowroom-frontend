@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 
 const RoomInfinite = dynamic(() => import('@/components/canvas/RoomInfinity').then((mod) => mod.RoomInfinite), { ssr: false });
 
-export default function ShowroomInfinity({items, picture, basePath, presenter}) {
+export default function ShowroomInfinity({items, picture, basePath, presenter, audioClick}) {
   const [firstTime, setFirstTime] = useState(true);
   const [howto, setHowto] = useState(true);
   const [itemFocus, setItemFocus] = useState(-1);
@@ -17,11 +17,15 @@ export default function ShowroomInfinity({items, picture, basePath, presenter}) 
   const bgVideoRef = useRef();
   const videoPresenterRef = useRef();
   const videoPresenterAlphaRef = useRef();
+  const audioClickRef = useRef();
 
   useEffect(() => {
     if(itemFocus != -1){
+      // play sound
+      audioClickRef.current.play();
+
       // animate
-      gsap.fromTo(transitionPageRef.current, {opacity:0}, {opacity:1, delay:0.5, duration:1, ease:'power2.out', onComplete:function(){
+      gsap.fromTo(transitionPageRef.current, {opacity:0}, {opacity:1, delay:2, duration:2, ease:'power2.out', onComplete:function(){
         router.push(items[itemFocus].url);
       }});
     }else {
@@ -31,7 +35,6 @@ export default function ShowroomInfinity({items, picture, basePath, presenter}) 
         }});
         setFirstTime(false);
       }
-      
     }
   }, [itemFocus]);
 
@@ -54,6 +57,14 @@ export default function ShowroomInfinity({items, picture, basePath, presenter}) 
             )}
           </>
         )}
+
+        <audio ref={audioClickRef} controls playsInline>
+          {(audioClick && audioClick != '') ? (
+            <source src={audioClick} type="audio/mpeg" />
+          ):(
+            <source src={`${basePath}/audio-click.mp3`} type="audio/mpeg" />
+          )}
+        </audio>
       </div>
 
       <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />

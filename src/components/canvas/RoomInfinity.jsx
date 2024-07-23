@@ -1021,7 +1021,7 @@ export const VideoComponent = ({indexKey, itemTotal, scroll, videoPresenterRef, 
 // }
 
 
-export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal, scroll, interactive, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const OneProduct = ({indexKey, texture, video, distance, pos, setFocus,  itemTotal, scroll, interactive, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const mat = useLoader(TextureLoader, texture);
   mat.color = "#000000";
   // mat.encoding = THREE.sRGBEncoding;
@@ -1045,7 +1045,7 @@ export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal,
             onClick={(e) => {
               e.stopPropagation();
 
-              let totalHeight = scroll.el.clientHeight * itemTotal;
+              let totalHeight = scroll.el.clientHeight * itemTotal * distance;
               let cameraOffset = scroll.el.clientHeight * 0.5;
               let scrollFocus = ((indexKey/itemTotal) * totalHeight) - cameraOffset;
 
@@ -1054,8 +1054,12 @@ export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal,
               if(ww >= 1024){
                 // desktop
                 if((indexKey/itemTotal) < scroll.offset){
+                  // console.log(1+((indexKey-0.5)/itemTotal));
+
                   scroll.scroll.current = 1+((indexKey-0.5)/itemTotal);
                 }else {
+                  // console.log(scrollFocus);
+
                   scroll.el.scroll(0, scrollFocus);
                 }
               }
@@ -1069,6 +1073,7 @@ export const OneProduct = ({indexKey, texture, video, pos, setFocus,  itemTotal,
                 }
               }
 
+              // set focus
               setFocus(indexKey);
             }}
             onPointerOver={(e) => {
@@ -1128,7 +1133,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
   return (<></>)
 }
 
-export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
   const roomRef = useRef();
   const scroll = useScroll();
@@ -1182,6 +1187,7 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 bgVideoRef={bgVideoRef}
                 videoPresenterRef={videoPresenterRef} 
                 videoPresenterAlphaRef={videoPresenterAlphaRef}
+                distance={distance}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(product_z * (items.length - itemKey))]}
               />
 
@@ -1198,6 +1204,7 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 bgVideoRef={bgVideoRef}
                 videoPresenterRef={videoPresenterRef} 
                 videoPresenterAlphaRef={videoPresenterAlphaRef}
+                distance={distance}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * itemKey)]}
               />
 
@@ -1214,6 +1221,7 @@ export const AllProducts = ({items, mcDepth, mcRepeat, setFocus, picture, mq, ba
                 bgVideoRef={bgVideoRef}
                 videoPresenterRef={videoPresenterRef} 
                 videoPresenterAlphaRef={videoPresenterAlphaRef}
+                distance={distance}
                 pos={[product_x * (itemKey%2 == 0 ? (1):(-1)), product_y, start_z+(-product_z * (itemKey+items.length))]}
               />
             </>
@@ -1258,6 +1266,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
   const room_item = 2;
   const room_repeat = Math.ceil(count_items/room_item);
   const one_room_depth = 40;
+  const scroll_distance = 2;
 
   const [mq, setMQ] = useState(false);
   useLayoutEffect(() => {
@@ -1316,8 +1325,8 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
             animate={{ z: 0}}
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
-          <ScrollControls infinite damping={mq ? (2):(0)} pages={count_items}>
-              <AllProducts items={items} mcDepth={one_room_depth} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
+          <ScrollControls infinite damping={mq ? (2):(0)} distance={scroll_distance} pages={count_items}>
+              <AllProducts items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
       </Suspense>
