@@ -91,7 +91,7 @@ export default async function ProductDetail({ params }) {
           )}
 
           {/* section-1 */}
-          {section.widget === "section-1" && (
+          {(section.widget === "section-1" && section.section_1) && (
             <>
               {section.section_1?.map((section1, section1Key) => (
                 <div 
