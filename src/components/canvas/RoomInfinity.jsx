@@ -1134,7 +1134,10 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
 }
 
 export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
-  const [pic_1, pic_2] = useLoader(TextureLoader, picture);
+  let textureLoader = new TextureLoader();
+      textureLoader.crossOrigin = null;
+  // const [pic_1, pic_2] = useLoader(TextureLoader, picture);
+  const [pic_1, pic_2] = useLoader(textureLoader, picture);
   const roomRef = useRef();
   const scroll = useScroll();
 
