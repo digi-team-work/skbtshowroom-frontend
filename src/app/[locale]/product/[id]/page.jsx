@@ -148,7 +148,7 @@ export default async function ProductDetail({ params }) {
                                 style={{
                                   color: item.title_color ? (item.title_color):('inherit')
                                 }}
-                              >{item.title.text}</h4>
+                              >{item.title}</h4>
                               <p 
                                 style={{
                                   color: item.excerpt_color ? (item.excerpt_color):('inherit')
