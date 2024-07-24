@@ -155,6 +155,9 @@
 
         .thumbnail {
           @apply block w-full h-auto relative overflow-hidden;
+          
+          background: rgb(192,213,218);
+          background: linear-gradient(180deg, rgba(192,213,218,1) 0%, rgba(177,200,205,1) 50%, rgba(142,167,173,1) 100%);
 
           img {
             @apply block w-full h-full
