@@ -92,72 +92,77 @@ export default async function ProductDetail({ params }) {
 
           {/* section-1 */}
           {section.widget === "section-1" && (
-            <div 
-              className='section-1'
-              style={{
-                backgroundColor: section.background_color ? (section.background_color):('inherit'), 
-                backgroundImage: section.background_image ? (`url(${section.background_image})`):('none'), 
-                backgroundPosition: section.background_position ? (section.background_position):('left top'), 
-                backgroundSize: section.background_size ? (section.background_size):('auto auto'), 
-                backgroundRepeat: section.background_repeat ? (section.background_repeat):('repeat')
-              }}
-            >
-              <div className='container'>
-                <div className='section-title'>
-                  {section.mascot && (
-                    <div className='mascot'>
-                      <img src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
-                    </div>
-                  )}
-
-                  <h2 
-                    className='title'
-                    style={{
-                      color: section.title_color ? (section.title_color):('inherit')
-                    }}
-                  >
-                    {section.title_type == "image" ? (
-                      <img src={section.title_image} alt={`${section.title}`} width={640} />
-                    ):(section.title)}
-                  </h2>
-                </div>
-      
-                <div className='list-items'>
-                  {section.lists?.map((item, itemKey) => (
-                    <div 
-                      key={`content1-${sectionKey}-${itemKey}`} 
-                      className={`one-item ${item.template}`}
-                      style={{
-                        backgroundColor: item.background ? (item.background):('inherit')
-                      }}
-                    >
-                      <div className='thumbnail'>
-                        <picture>
-                          {item.template == "template-1" && (
-                            <source media="(min-width:1024px)" srcSet={item.image_desktop} />
-                          )}
-                          <img className={`${item.animate && 'img-ani'}`} src={item.image_mobile} alt='product'  />
-                        </picture>
-                      </div>
-                      <div className='content'>
-                        <div>
-                          <h4 
-                            style={{
-                              color: item.title_color ? (item.title_color):('inherit')
-                            }}
-                          >{item.title.text}</h4>
-                          <p 
-                            style={{
-                              color: item.excerpt_color ? (item.excerpt_color):('inherit')
-                            }}
-                          >{item.excerpt}</p>
+            <>
+              {section.section_1?.map((section1, section1Key) => (
+                <div 
+                  key={section1Key}
+                  className='section-1'
+                  style={{
+                    backgroundColor: section1.background_color ? (section1.background_color):('inherit'), 
+                    backgroundImage: section1.background_image ? (`url(${section1.background_image})`):('none'), 
+                    backgroundPosition: section1.background_position ? (section1.background_position):('left top'), 
+                    backgroundSize: section1.background_size ? (section1.background_size):('auto auto'), 
+                    backgroundRepeat: section1.background_repeat ? (section1.background_repeat):('repeat')
+                  }}
+                >
+                  <div className='container'>
+                    <div className='section-title'>
+                      {section1.mascot && (
+                        <div className='mascot'>
+                          <img src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
                         </div>
-                      </div>
+                      )}
+    
+                      <h2 
+                        className='title'
+                        style={{
+                          color: section1.title_color ? (section1.title_color):('inherit')
+                        }}
+                      >
+                        {section1.title_type == "image" ? (
+                          <img src={section1.title_image} alt={`${section1.title}`} width={640} />
+                        ):(section1.title)}
+                      </h2>
                     </div>
-                  ))}
+          
+                    <div className='list-items'>
+                      {section1.lists?.map((item, itemKey) => (
+                        <div 
+                          key={`content1-${section1Key}-${itemKey}`} 
+                          className={`one-item ${item.template}`}
+                          style={{
+                            backgroundColor: item.background ? (item.background):('inherit')
+                          }}
+                        >
+                          <div className='thumbnail'>
+                            <picture>
+                              {item.template == "template-1" && (
+                                <source media="(min-width:1024px)" srcSet={item.image_desktop} />
+                              )}
+                              <img className={`${item.animate && 'img-ani'}`} src={item.image_mobile} alt='product'  />
+                            </picture>
+                          </div>
+                          <div className='content'>
+                            <div>
+                              <h4 
+                                style={{
+                                  color: item.title_color ? (item.title_color):('inherit')
+                                }}
+                              >{item.title.text}</h4>
+                              <p 
+                                style={{
+                                  color: item.excerpt_color ? (item.excerpt_color):('inherit')
+                                }}
+                              >{item.excerpt}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ))}
+            </>
           )}
 
           {/* section-2 */}
