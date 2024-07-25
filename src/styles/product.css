@@ -306,7 +306,7 @@
 
           img {
             @apply block w-full h-auto
-            object-cover aspect-[123/90]
+            object-contain aspect-[123/90]
             transition-all duration-500 ease-out;
           }
         }
