@@ -68,17 +68,17 @@ export default function ProductModalSlide({items=[
                 <div 
                   className='readmore'
                   style={{
-                    backgroundColor: item.button_color ? (item.button_color):('revert-layer') 
+                    backgroundColor: item.button.button_color ? (item.button.button_color):('revert-layer') 
                   }}
                 >
                   <span
                     style={{
-                      backgroundColor: item.text_color ? (item.text_color):('revert-layer') 
+                      backgroundColor: item.button.text_color ? (item.button.text_color):('revert-layer') 
                     }}
                   ></span>
                   <span
                     style={{
-                      backgroundColor: item.text_color ? (item.text_color):('revert-layer') 
+                      backgroundColor: item.button.text_color ? (item.button.text_color):('revert-layer') 
                     }}
                   ></span>
                 </div>
