@@ -3,8 +3,11 @@
   /* bg-white */
   bg-c-gray-800
   
+  /* 
   pb-20
-  lg:pb-0;
+  lg:pb-0
+  */
+  ;
 
   .btnBack2Top {
     @apply block fixed z-50 right-4 w-auto h-auto cursor-pointer
@@ -55,36 +58,21 @@
     }
 
     .mobile-bottom {
-      @apply flex flex-nowrap justify-around gap-3 w-full px-3
-      fixed left-0 bottom-0 bg-white
-      /* items-center h-[80px] */
-      items-start
-      pb-2
-
-      lg:justify-end lg:static lg:left-auto lg:bottom-auto lg:w-auto lg:px-0 lg:h-auto
-      lg:bg-transparent
-      
-      lg:pb-0;
+      @apply hidden gap-3 flex-nowrap items-center justify-end w-auto px-0 h-auto
+      lg:flex;
 
       .one-menu {
-        @apply font-medium uppercase border-0 text-[18px] leading-[0.9] text-c-gray-500 text-center max-w-[calc(25%-15px)]
-        transition-all duration-200
-        line-clamp-3
-        pt-3
-
-        lg:line-clamp-none
-        lg:inline-flex lg:items-center lg:px-4 lg:gap-2 lg:text-[21px] lg:leading-none lg:max-w-none
-        lg:rounded-md lg:bg-black/50 lg:text-white lg:py-[11px];
+        @apply font-medium uppercase border-0 text-center 
+        inline-flex items-center gap-2 rounded-md px-4 py-[11px]
+        text-[21px] leading-none text-white bg-black/50
+        transition-all duration-200;
       
         &:hover {
           @apply lg:bg-black/80;
         }
 
         img {
-          @apply size-[18px] mb-2 mx-auto 
-          lg:size-[25px] lg:mb-0 lg:!filter-none
-          ;
-
+          @apply  mx-auto size-[25px] mb-0 !filter-none;
           filter: invert(50%) sepia(250%) saturate(400%) hue-rotate(-30deg) contrast(100%);
         }
       }
@@ -95,6 +83,31 @@
     @apply bg-white text-c-gray-500 font-normal text-center 
     text-[20px] py-5
     lg:text-[24px];
+  }
+
+  .mobile-menu-bottom {
+    @apply flex flex-nowrap justify-around gap-3 w-full px-3
+    sticky bottom-0 z-50 bg-white
+    items-start
+    pb-2
+
+    lg:!hidden;
+
+    .one-menu {
+      @apply font-medium uppercase border-0 text-[18px] leading-[0.9] text-c-gray-500 text-center 
+      transition-all duration-200
+      line-clamp-3
+      pt-3;
+    
+      &:hover {
+        @apply lg:bg-black/80;
+      }
+
+      img {
+        @apply size-[18px] mb-2 mx-auto;
+        filter: invert(50%) sepia(250%) saturate(400%) hue-rotate(-30deg) contrast(100%);
+      }
+    }
   }
 
   .section-banner {
@@ -115,8 +128,7 @@
 
   .section-1 {
     @apply relative bg-c-gray-100
-    pt-8 pb-1
-    md:py-8
+    py-8
     lg:py-[60px];
 
     .section-title {

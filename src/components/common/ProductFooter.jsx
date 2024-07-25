@@ -7,7 +7,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export default function ProductFooter({copyright="สงวนลิขสิทธิ์ © 2022 บริษัทสยามคูโบต้าคอร์ปอเรชั่น จำกัด", basePath , back2top="กลับสู่ด้านบน"}) {
+export default function ProductFooter({copyright="สงวนลิขสิทธิ์ © 2022 บริษัทสยามคูโบต้าคอร์ปอเรชั่น จำกัด", mobileMenu, basePath, linkPath, back2top="กลับสู่ด้านบน"}) {
   const b2t = useRef();
 
   useEffect(() => {
@@ -48,6 +48,17 @@ export default function ProductFooter({copyright="สงวนลิขสิท
         <img src={`${basePath}/assets/img/product/back2top.png`} alt='back to top' />
         <div>{back2top}</div>
       </div>
+
+      {mobileMenu && (
+        <div className={`mobile-menu-bottom ${mobileMenu?.length == 0 && '!hidden'}`}>
+          {mobileMenu?.map((item, itemKey) => (
+            <a key={`mobile-menu-${itemKey}`} className='one-menu' href={`${item.link.url}`} target={`${item.link.target}`}>
+              <img src={`${item.icon}`} alt={`${item.title}`} />
+              {item.title}
+            </a>
+          ))}
+        </div>
+      )}
     </>
   )
 }

@@ -315,7 +315,7 @@ export default async function ProductDetail({ params }) {
       ))}
 
       {/* footer */}
-      <ProductFooter copyright={t('copyright')} basePath={basePath} back2top={t('back2top')} />
+      <ProductFooter copyright={t('copyright')} mobileMenu={productCMS.header} basePath={basePath} linkPath={linkPath} back2top={t('back2top')} />
     </div>
   );
 }
