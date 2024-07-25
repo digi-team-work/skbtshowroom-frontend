@@ -25,13 +25,21 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
       audioClickRef.current.play();
 
       // animate
-      gsap.fromTo(transitionPageRef.current, {opacity:0}, {opacity:1, delay:2, duration:2, ease:'power2.out', onComplete:function(){
-        router.push(items[itemFocus].url);
-      }});
+      let ww = window.innerWidth;
+      if(ww >= 1024){
+        gsap.fromTo(transitionPageRef.current, {opacity:0}, {opacity:1, delay:2, duration:2, ease:'power2.out', onComplete:function(){
+          router.push(items[itemFocus].url);
+        }});
+      }else {
+        gsap.fromTo(transitionPageRef.current, {opacity:0}, {opacity:1, delay:0.5, duration:0.5, ease:'power2.out', onComplete:function(){
+          router.push(items[itemFocus].url);
+        }});
+      }
+      
     }else {
       if(firstTime){
         gsap.fromTo(transitionPageRef.current, {opacity:1}, {opacity:0, delay:1.5, duration:0.6, onComplete:function(){
-          setHowto(false);
+          // setHowto(false);
         }});
         setFirstTime(false);
       }

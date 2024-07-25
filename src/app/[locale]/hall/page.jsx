@@ -118,7 +118,7 @@ export default async function HallPage() {
           title:"",
           texture:item.image_showroom,
           video:[],
-          url:`${linkPath}/product/${item.id}`
+          url:`${linkPath}/product/${item.slug ? (item.slug):(item.id)}`
         });
       }
     }else if(item.type == "person") {
