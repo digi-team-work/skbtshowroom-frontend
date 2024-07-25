@@ -9,9 +9,13 @@ import { MetadataDefault } from "@/lib/metadata";
 export const metadata = MetadataDefault;
 
 export default function RootLayout({ children, params: { locale } }) {
+  const basePath = `${process.env.SKBT_BASEPATH}`;
+
   return (
     <html lang={locale} className='antialiased'>
-      <head />
+      <head>
+        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
+      </head>
       <body>
         <Layout>{children}</Layout>
       </body>
