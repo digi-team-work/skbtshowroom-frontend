@@ -54,12 +54,18 @@ export default function ProductModalSlide({items=[
             )}
             <div className='content'>
               <div>
-                <h4 style={{
-                  color: item.title_color ? (item.title_color):('revert-layer')
-                }}>{item.title}</h4>
-                <p style={{
-                  color: item.excerpt_color ? (item.excerpt_color):('revert-layer')
-                }}>{item.excerpt}</p>
+                <h4 
+                  style={{
+                    color: item.title_color ? (item.title_color):('revert-layer')
+                  }}
+                  dangerouslySetInnerHTML={{__html:item.title}}
+                />
+                <p 
+                  style={{
+                    color: item.excerpt_color ? (item.excerpt_color):('revert-layer')
+                  }}
+                  dangerouslySetInnerHTML={{__html:item.excerpt}}
+                />
               </div>
             </div>
 
@@ -87,8 +93,8 @@ export default function ProductModalSlide({items=[
                   <DialogTrigger className='hit'></DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>{item.title}</DialogTitle>
-                      <DialogDescription>{item.description}</DialogDescription>
+                      <DialogTitle><div className='clearBr' dangerouslySetInnerHTML={{__html:item.title}} /></DialogTitle>
+                      <DialogDescription><div dangerouslySetInnerHTML={{__html:item.description}} /></DialogDescription>
                     </DialogHeader>
                   </DialogContent>
                 </Dialog>

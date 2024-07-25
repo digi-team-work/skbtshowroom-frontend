@@ -60,16 +60,24 @@ export default function ProductMascot({type, color, mascot, title, title_img}) {
         </div>
       )}
 
-      <h2 
-        className='title'
-        style={{
-          color: color ? (color):('revert-layer')
-        }}
-      >
-        {type == "image" ? (
+      {type == "image" ? (
+        <h2 
+          className='title'
+          style={{
+            color: color ? (color):('revert-layer')
+          }}
+        >
           <img src={title_img} alt={`${title}`} width={640} />
-        ):(title)}
-      </h2>
+        </h2>
+      ):(
+        <h2 
+          className='title'
+          style={{
+            color: color ? (color):('revert-layer')
+          }}
+          dangerouslySetInnerHTML={{__html:title}}
+        />
+      )}
     </div>
   )
 }

@@ -132,12 +132,14 @@ export default async function ProductDetail({ params }) {
                                 style={{
                                   color: item.title_color ? (item.title_color):('revert-layer')
                                 }}
-                              >{item.title}</h4>
+                                dangerouslySetInnerHTML={{__html:item.title}}
+                              />
                               <p 
                                 style={{
                                   color: item.excerpt_color ? (item.excerpt_color):('revert-layer')
                                 }}
-                              >{item.excerpt}</p>
+                                dangerouslySetInnerHTML={{__html:item.excerpt}}
+                              />
                             </div>
                           </div>
                         </div>
@@ -163,16 +165,24 @@ export default async function ProductDetail({ params }) {
             >
               <div className='container'>
                 <div className='section-title'>
-                  <h2 
-                    className='title'
-                    style={{
-                      color: section.title_color ? (section.title_color):('revert-layer')
-                    }}
-                  >
-                    {section.title_type == "image" ? (
+                  {section.title_type == "image" ? (
+                    <h2 
+                      className='title'
+                      style={{
+                        color: section.title_color ? (section.title_color):('revert-layer')
+                      }}
+                    >
                       <img src={section.title_image} alt={`${section.title}`} width={860} height={125} />
-                    ):(section.title)}
-                  </h2>
+                    </h2>
+                  ):(
+                    <h2 
+                      className='title'
+                      style={{
+                        color: section.title_color ? (section.title_color):('revert-layer')
+                      }}
+                      dangerouslySetInnerHTML={{__html:section.title}}
+                    />
+                  )}
                 </div>
       
                 <div className='list-items'>
