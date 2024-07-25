@@ -10,6 +10,7 @@ import ProductVideoBanner from '@/components/common/ProductVideoBanner';
 import Button from '@/components/common/Button';
 import ProductHeader from '@/components/common/ProductHeader';
 import ProductFooter from '@/components/common/ProductFooter';
+import ProductMascot from '@/components/common/ProductMascot';
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // fetch data
@@ -106,24 +107,7 @@ export default async function ProductDetail({ params }) {
                   }}
                 >
                   <div className='container'>
-                    <div className='section-title'>
-                      {section1.mascot && (
-                        <div className='mascot'>
-                          <img src={`${process.env.SKBT_BASEPATH}/assets/img/product/mascot.png`} alt="mascot" width={250} height={250} />
-                        </div>
-                      )}
-    
-                      <h2 
-                        className='title'
-                        style={{
-                          color: section1.title_color ? (section1.title_color):('revert-layer')
-                        }}
-                      >
-                        {section1.title_type == "image" ? (
-                          <img src={section1.title_image} alt={`${section1.title}`} width={640} />
-                        ):(section1.title)}
-                      </h2>
-                    </div>
+                    <ProductMascot type={section1.title_type} color={section1.title_color} mascot={section1.mascot} title={section1.title} title_img={section1.title_image} />
           
                     <div className='list-items'>
                       {section1.lists?.map((item, itemKey) => (
