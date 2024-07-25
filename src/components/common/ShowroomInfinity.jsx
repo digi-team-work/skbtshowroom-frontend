@@ -41,17 +41,17 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
   return (
     <>
       <div className='block invisible absolute left-0 top-0 w-1 h-0 overflow-hidden'>
-        <video ref={bgVideoRef} src={`${basePath}/bg-presenter.mp4`} controls={true} muted={true} playsInline={true} autoPlay={true} loop={true} />
+        <video ref={bgVideoRef} src={`${basePath}/bg-presenter.mp4`} controls={true} muted={true} playsInline={true} autoPlay={true} loop={true} crossOrigin="Anonymous" />
 
         {presenter && (
           <>
             {presenter.video.length > 0 && (
               <>
                 {presenter.video[0] != '' && (
-                  <video ref={videoPresenterRef} src={presenter.video[0]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} />
+                  <video ref={videoPresenterRef} src={presenter.video[0]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} crossOrigin="Anonymous" />
                 )}
                 {presenter.video[1] != '' && (
-                  <video ref={videoPresenterAlphaRef} src={presenter.video[1]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} />
+                  <video ref={videoPresenterAlphaRef} src={presenter.video[1]} controls={true} muted={true} playsInline={true} autoPlay={true} loop={false} crossOrigin="Anonymous" />
                 )}
               </>
             )}
