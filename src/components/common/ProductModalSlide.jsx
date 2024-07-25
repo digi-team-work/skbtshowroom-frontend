@@ -44,7 +44,7 @@ export default function ProductModalSlide({items=[
           <div 
             className={`one-item ${!(item.thumbnail && item.thumbnail != "") && 'not-thumbnail'} ${item.description && 'has-detail'}`}
             style={{
-              backgroundColor: item.background_color ? (item.background_color):('inherit') 
+              backgroundColor: item.background_color ? (item.background_color):('revert-layer') 
             }}
           >
             {(item.thumbnail && item.thumbnail != "") && (
@@ -55,10 +55,10 @@ export default function ProductModalSlide({items=[
             <div className='content'>
               <div>
                 <h4 style={{
-                  color: item.title_color ? (item.title_color):('inherit')
+                  color: item.title_color ? (item.title_color):('revert-layer')
                 }}>{item.title}</h4>
                 <p style={{
-                  color: item.excerpt_color ? (item.excerpt_color):('inherit')
+                  color: item.excerpt_color ? (item.excerpt_color):('revert-layer')
                 }}>{item.excerpt}</p>
               </div>
             </div>
@@ -68,12 +68,17 @@ export default function ProductModalSlide({items=[
                 <div 
                   className='readmore'
                   style={{
-                    backgroundColor: item.button_color ? (item.button_color):('inherit') 
+                    backgroundColor: item.button_color ? (item.button_color):('revert-layer') 
                   }}
                 >
                   <span
                     style={{
-                      backgroundColor: item.text_color ? (item.text_color):('inherit') 
+                      backgroundColor: item.text_color ? (item.text_color):('revert-layer') 
+                    }}
+                  ></span>
+                  <span
+                    style={{
+                      backgroundColor: item.text_color ? (item.text_color):('revert-layer') 
                     }}
                   ></span>
                 </div>

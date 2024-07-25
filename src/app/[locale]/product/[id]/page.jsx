@@ -98,7 +98,7 @@ export default async function ProductDetail({ params }) {
                   key={section1Key}
                   className='section-1'
                   style={{
-                    backgroundColor: section1.background_color ? (section1.background_color):('inherit'), 
+                    backgroundColor: section1.background_color ? (section1.background_color):('revert-layer'), 
                     backgroundImage: section1.background_image ? (`url(${section1.background_image})`):('none'), 
                     backgroundPosition: section1.background_position ? (section1.background_position):('left top'), 
                     backgroundSize: section1.background_size ? (section1.background_size):('auto auto'), 
@@ -116,7 +116,7 @@ export default async function ProductDetail({ params }) {
                       <h2 
                         className='title'
                         style={{
-                          color: section1.title_color ? (section1.title_color):('inherit')
+                          color: section1.title_color ? (section1.title_color):('revert-layer')
                         }}
                       >
                         {section1.title_type == "image" ? (
@@ -146,12 +146,12 @@ export default async function ProductDetail({ params }) {
                             <div>
                               <h4 
                                 style={{
-                                  color: item.title_color ? (item.title_color):('inherit')
+                                  color: item.title_color ? (item.title_color):('revert-layer')
                                 }}
                               >{item.title}</h4>
                               <p 
                                 style={{
-                                  color: item.excerpt_color ? (item.excerpt_color):('inherit')
+                                  color: item.excerpt_color ? (item.excerpt_color):('revert-layer')
                                 }}
                               >{item.excerpt}</p>
                             </div>
@@ -170,7 +170,7 @@ export default async function ProductDetail({ params }) {
             <div 
               className='section-2'
               style={{
-                backgroundColor: section.background_color ? (section.background_color):('inherit'), 
+                backgroundColor: section.background_color ? (section.background_color):('revert-layer'), 
                 backgroundImage: section.background_image ? (`url(${section.background_image})`):('none'), 
                 backgroundPosition: section.background_position ? (section.background_position):('left top'), 
                 backgroundSize: section.background_size ? (section.background_size):('auto auto'), 
@@ -182,7 +182,7 @@ export default async function ProductDetail({ params }) {
                   <h2 
                     className='title'
                     style={{
-                      color: section.title_color ? (section.title_color):('inherit')
+                      color: section.title_color ? (section.title_color):('revert-layer')
                     }}
                   >
                     {section.title_type == "image" ? (
@@ -210,7 +210,7 @@ export default async function ProductDetail({ params }) {
             <div 
               className='section-4'
               style={{
-                backgroundColor: section.background_color ? (section.background_color):('inherit')
+                backgroundColor: section.background_color ? (section.background_color):('revert-layer')
               }}
             >
               <div className='cover'>
@@ -232,12 +232,12 @@ export default async function ProductDetail({ params }) {
                     className='btn-style-3' 
                     setStyle={{
                       normal:{
-                        backgroundColor:section.button.background_color_normal ? (section.button.background_color_normal):('inherit'),
-                        color:section.button.title_color_normal ? (section.button.title_color_normal):('inherit')
+                        backgroundColor:section.button.background_color_normal ? (section.button.background_color_normal):('revert-layer'),
+                        color:section.button.title_color_normal ? (section.button.title_color_normal):('revert-layer')
                       },
                       hover:{
-                        backgroundColor:section.button.background_color_hover ? (section.button.background_color_hover):('inherit'),
-                        color:section.button.title_color_hover ? (section.button.title_color_hover):('inherit')
+                        backgroundColor:section.button.background_color_hover ? (section.button.background_color_hover):('revert-layer'),
+                        color:section.button.title_color_hover ? (section.button.title_color_hover):('revert-layer')
                       }
                     }}
                     href={section.button.href} 
@@ -256,7 +256,7 @@ export default async function ProductDetail({ params }) {
             <div 
               className='section-5'
               style={{
-                backgroundColor: section.background_color ? (section.background_color):('inherit')
+                backgroundColor: section.background_color ? (section.background_color):('revert-layer')
               }}
             >
               <div className='cover'>
@@ -278,12 +278,12 @@ export default async function ProductDetail({ params }) {
                     className='btn-style-3' 
                     setStyle={{
                       normal:{
-                        backgroundColor:section.button.background_color_normal ? (section.button.background_color_normal):('inherit'),
-                        color:section.button.title_color_normal ? (section.button.title_color_normal):('inherit')
+                        backgroundColor:section.button.background_color_normal ? (section.button.background_color_normal):('revert-layer'),
+                        color:section.button.title_color_normal ? (section.button.title_color_normal):('revert-layer')
                       },
                       hover:{
-                        backgroundColor:section.button.background_color_hover ? (section.button.background_color_hover):('inherit'),
-                        color:section.button.title_color_hover ? (section.button.title_color_hover):('inherit')
+                        backgroundColor:section.button.background_color_hover ? (section.button.background_color_hover):('revert-layer'),
+                        color:section.button.title_color_hover ? (section.button.title_color_hover):('revert-layer')
                       }
                     }}
                     href={section.button.href} 
