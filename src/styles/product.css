@@ -55,16 +55,22 @@
     }
 
     .mobile-bottom {
-      @apply flex flex-nowrap justify-around items-center gap-3 w-full h-[80px] px-3
+      @apply flex flex-nowrap justify-around gap-3 w-full px-3
       fixed left-0 bottom-0 bg-white
+      /* items-center h-[80px] */
+      items-start
+      pb-2
 
       lg:justify-end lg:static lg:left-auto lg:bottom-auto lg:w-auto lg:px-0 lg:h-auto
-      lg:bg-transparent;
+      lg:bg-transparent
+      
+      lg:pb-0;
 
       .one-menu {
         @apply font-medium uppercase border-0 text-[18px] leading-[0.9] text-c-gray-500 text-center max-w-[calc(25%-15px)]
         transition-all duration-200
-        line-clamp-2
+        line-clamp-3
+        pt-3
 
         lg:line-clamp-none
         lg:inline-flex lg:items-center lg:px-4 lg:gap-2 lg:text-[21px] lg:leading-none lg:max-w-none
@@ -205,7 +211,8 @@
         .content {
           @apply flex justify-start items-center 
           /* text-white */
-          text-[23px] px-0
+          text-[23px] 
+          /* px-0 */
           lg:text-[30px] lg:px-10;
 
           h4 {
@@ -232,7 +239,8 @@
         .content {
           @apply flex justify-start items-center 
           /* text-white */
-          text-[23px] px-0
+          text-[23px] 
+          /* px-0 */
           lg:text-[30px] lg:px-10 lg:order-1;
 
           h4 {
@@ -484,7 +492,9 @@
     }
 
     .box-btn {
-      @apply py-6 text-center;
+      @apply pt-6 pb-14
+      /* py-6  */
+      text-center;
     }
   }
 
