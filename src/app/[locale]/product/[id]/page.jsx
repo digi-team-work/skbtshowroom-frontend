@@ -18,13 +18,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
   const resMetaData = await fetch(`https://skbt-main.digi-team.work/onlineshowroom-backend/wp-json/restapi/v2/products/${id}`).then((res) => res.json())
   const metaData = resMetaData.seo_data;
 
-  let og_url = '';
-  if(metaData.og_url){
-    og_url = metaData.og_url.replace("https://skbt-main.digi-team.work/onlineshowroom-backend/products/", "");
-    og_url = og_url.replace("/","");
-    og_url = `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/product/${og_url}`;
-  }
-  
+  // let og_url = '';
+  // if(metaData.og_url){
+  //   og_url = metaData.og_url.replace("https://skbt-main.digi-team.work/onlineshowroom-backend/products/", "");
+  //   og_url = og_url.replace("/","");
+  //   og_url = `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/product/${og_url}`;
+  // }
+  // url: og_url ? (og_url):(`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`),
   
   return {
     title: metaData.title ? (metaData.title):(MetadataDefault.title),
@@ -35,7 +35,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       title: metaData.og_title ? (metaData.og_title) : (MetadataDefault.openGraph.title),
       description: metaData.og_description ? (metaData.og_description):(MetadataDefault.openGraph.description),
       locale: metaData.og_locale ? (metaData.og_locale):(MetadataDefault.openGraph.locale),
-      url: og_url ? (og_url):(`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`),
+      url: resMetaData.slug ? (`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/product/${resMetaData.slug}`):(`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`),
       siteName: MetadataDefault.openGraph.siteName,
       images: metaData.og_image ? (metaData.og_image):(MetadataDefault.openGraph.images),
     },
