@@ -20,7 +20,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
   let og_url = '';
   if(metaData.og_url){
-    og_url = metaData.og_url.replace("https://skbt-main.digi-team.work/onlineshowroom-backend/products/", `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/`);
+    og_url = metaData.og_url.replace("https://skbt-main.digi-team.work/onlineshowroom-backend/products/", "");
+    og_url = og_url.replace("/");
+    og_url = `${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/${og_url}`;
   }
   
   
