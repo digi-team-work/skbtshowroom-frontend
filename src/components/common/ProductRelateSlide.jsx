@@ -59,7 +59,7 @@ export default function ProductRelateSlide({items=[
           </div>
 
           <div className='box-btn'>
-            <a className='btn-style-4' href={items[0].permalink}>ดูรายละเอียด</a>
+            <a className='btn-style-4' href={items[0].permalink} target={items[0].target ? (items[0].target):('_self')}>ดูรายละเอียด</a>
           </div>
         </div>
       ):(
@@ -110,7 +110,7 @@ export default function ProductRelateSlide({items=[
                 </div>
 
                 <div className='box-btn'>
-                  <a className='btn-style-4' href={item.permalink}>ดูรายละเอียด</a>
+                  <a className='btn-style-4' href={item.permalink} target={item.target ? (item.target):('_self')}>ดูรายละเอียด</a>
                 </div>
               </div>
             </SplideSlide>
