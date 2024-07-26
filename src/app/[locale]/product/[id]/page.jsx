@@ -27,7 +27,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       title: metaData.og_title ? (metaData.og_title) : (MetadataDefault.openGraph.title),
       description: metaData.og_description ? (metaData.og_description):(MetadataDefault.openGraph.description),
       locale: metaData.og_locale ? (metaData.og_locale):(MetadataDefault.openGraph.locale),
-      url: metaData.og_url ? (metaData.og_url):(`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`),
+      url: resMetaData.title ? (`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}/${resMetaData.title}`):(`${process.env.SKBT_HTTP_HOST}${process.env.SKBT_SUBFOLDER}`),
       siteName: MetadataDefault.openGraph.siteName,
       images: metaData.og_image ? (metaData.og_image):(MetadataDefault.openGraph.images),
     },
