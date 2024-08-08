@@ -136,12 +136,6 @@ export default async function HallPage() {
     }
   });
 
-  // switch pos
-  if(items.length != 0){
-    let itemFirst = items.pop();
-    items.unshift(itemFirst);
-  }
-
   // add space
   if(items.length%2 > 0){
     items.push({
@@ -152,6 +146,14 @@ export default async function HallPage() {
       video:[],
       url:""
     });
+
+  // switch pos
+  if(items.length != 0){
+    let itemFirst = items.pop();
+    items.unshift(itemFirst);
+  }
+
+  
   }
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
   const presenter = items.find((item, itemKey) => item.type == 'person');

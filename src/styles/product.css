@@ -545,6 +545,9 @@
         span {
           @apply text-c-green-500;
         }
+        b {
+          @apply text-c-orange-500;
+        }
       }
     }
 
