@@ -280,16 +280,35 @@ export default async function ProductDetail({ params }) {
               }}
             >
               <div className='cover'>
-                <picture>
-                  {section.image_background_desktop && (<source media="(min-width:1024px)" srcSet={`${section.image_background_desktop}`} />)}
-                  {section.image_background_mobile ? (
-                    <img src={`${section.image_background_mobile}`} alt='image'  />
-                  ):(
-                    <>
-                      {section.image_background_desktop && (<img src={`${section.image_background_desktop}`} alt='image'  />)}
-                    </>
-                  )}
-                </picture>
+                {(section.button.href == '') ? (
+                  <picture>
+                    {section.image_background_desktop && (<source media="(min-width:1024px)" srcSet={`${section.image_background_desktop}`} />)}
+                    {section.image_background_mobile ? (
+                      <img src={`${section.image_background_mobile}`} alt='image'  />
+                    ):(
+                      <>
+                        {section.image_background_desktop && (<img src={`${section.image_background_desktop}`} alt='image'  />)}
+                      </>
+                    )}
+                  </picture>
+                ):(
+                  <Link
+                    href={section.button.href} 
+                    target={section.button.target}
+                  >
+                    <picture>
+                      {section.image_background_desktop && (<source media="(min-width:1024px)" srcSet={`${section.image_background_desktop}`} />)}
+                      {section.image_background_mobile ? (
+                        <img src={`${section.image_background_mobile}`} alt='image'  />
+                      ):(
+                        <>
+                          {section.image_background_desktop && (<img src={`${section.image_background_desktop}`} alt='image'  />)}
+                        </>
+                      )}
+                    </picture>
+                  </Link>
+                )}
+                
               </div>
 
               <div className={`box-btn ${!section.button.visible && '!hidden'}`}>
