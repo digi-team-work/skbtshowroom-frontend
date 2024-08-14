@@ -146,6 +146,7 @@ export default async function HallPage() {
       video:[],
       url:""
     });
+  }
 
   // switch pos
   if(items.length != 0){
@@ -153,8 +154,6 @@ export default async function HallPage() {
     items.unshift(itemFirst);
   }
 
-  
-  }
   const picture = [productList.image_showroom.left_wall_image, productList.image_showroom.right_wall_image];
   const presenter = items.find((item, itemKey) => item.type == 'person');
   const audioClick = productList.sound_showroom;
