@@ -1182,9 +1182,9 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
       countStop += 1;
       // console.log('count');
 
-      if(countStop >= 200){
+      if(countStop >= 100){
         scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
-        scroll.scroll.current = 0.999;
+        scroll.scroll.current = 0.995;
 
         // console.log('jump');
       }
@@ -1192,7 +1192,7 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
       countStop += 1;
       // console.log('count');
 
-      if(countStop >= 200){
+      if(countStop >= 100){
         scroll.el.scrollTop = 2;
         scroll.scroll.current = 0.005;
 
