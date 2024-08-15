@@ -1153,6 +1153,8 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
   const product_z = 20;
   const start_z = 0;
 
+  let countStop = 0;
+
   let room_repeat_arr = [''];
   for(let i=0; i<=mcRepeat; i++){
     room_repeat_arr.push('');
@@ -1162,6 +1164,44 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
   useFrame(() => {
     const percentRoom = (scroll.offset * mcRepeat)%1;
     roomRef.current.position.set((Math.sin((2 * Math.PI) * (percentRoom + offsetPI)) * cameraX), 0, (scroll.offset * mcDepth * mcRepeat));
+
+    // if(scroll.scroll.current == 1){
+    //   console.log(scroll.fill.scrollTop, scroll.fixed.scrollTop, document.body.scrollTop, document.scrollTop);
+    // }else {
+    //   console.log(scroll.scroll.current, scroll.offset);
+    // }
+
+    // console.log(scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight), scroll.scroll.current);
+
+    // if(scroll.scroll.current == 1){
+    //   scroll.el.scrollTop = 0;
+    //   scroll.scroll.current = 0;
+    // }
+
+    if(scroll.scroll.current == 1){
+      countStop += 1;
+      // console.log('count');
+
+      if(countStop >= 200){
+        scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
+        scroll.scroll.current = 0.999;
+
+        // console.log('jump');
+      }
+    }else if(scroll.scroll.current == 0){
+      countStop += 1;
+      // console.log('count');
+
+      if(countStop >= 200){
+        scroll.el.scrollTop = 2;
+        scroll.scroll.current = 0.005;
+
+        // console.log('jump');
+      }
+    }else {
+      countStop = 0;
+      // console.log('clear');
+    }
   })
 
   return (
