@@ -1133,7 +1133,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
   return (<></>)
 }
 
-export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const AllProducts = ({setConsoleLog, items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   // let textureLoader = new TextureLoader();
   //     textureLoader.crossOrigin = null;
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
@@ -1153,14 +1153,17 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
   const product_z = 20;
   const start_z = 0;
 
-  let countStop = 0;
-
   let room_repeat_arr = [''];
   for(let i=0; i<=mcRepeat; i++){
     room_repeat_arr.push('');
   }
 
   let firstScrollSet = true;
+
+  // let countStop = 0;
+  let countLimit = 50;
+  const [countStop, setCountStop] = useState(0);
+  let scrollStatus = 'clear';
   useFrame(() => {
     const percentRoom = (scroll.offset * mcRepeat)%1;
     roomRef.current.position.set((Math.sin((2 * Math.PI) * (percentRoom + offsetPI)) * cameraX), 0, (scroll.offset * mcDepth * mcRepeat));
@@ -1179,29 +1182,37 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
     // }
 
     if(scroll.scroll.current == 1){
-      countStop += 1;
+      setCountStop(countStop+1);
       // console.log('count');
+      scrollStatus = 'pause count ('+(countLimit-countStop)+') jump';
 
-      if(countStop >= 100){
-        scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
-        scroll.scroll.current = 0.995;
+      if(countStop >= countLimit){
+        scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 5;
+        scroll.scroll.current = 0.98;
 
         // console.log('jump');
+        scrollStatus = 'jump back';
       }
     }else if(scroll.scroll.current == 0){
-      countStop += 1;
+      setCountStop(countStop+1);
       // console.log('count');
+      scrollStatus = 'pause count ('+(countLimit-countStop)+') jump';
 
-      if(countStop >= 100){
-        scroll.el.scrollTop = 2;
-        scroll.scroll.current = 0.005;
+      if(countStop >= countLimit){
+        scroll.el.scrollTop = 5;
+        scroll.scroll.current = 0.02;
 
         // console.log('jump');
+        scrollStatus = 'jump back';
       }
     }else {
-      countStop = 0;
+      setCountStop(0);
       // console.log('clear');
+      scrollStatus = 'clear';
     }
+
+    // console.log(`status : "${scrollStatus}" | ${scroll.el.scrollTop}/${scroll.el.scrollHeight-scroll.el.offsetHeight}, ${scroll.scroll.current}, ${scroll.offset}`);
+    setConsoleLog(` "${scrollStatus}" | ${scroll.el.scrollTop}/${scroll.el.scrollHeight-scroll.el.offsetHeight}, ${scroll.scroll.current}, ${scroll.offset}`);
   })
 
   return (
@@ -1300,7 +1311,7 @@ export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, pictu
   )
 }
 
-export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const RoomInfinite = ({setConsoleLog, items, focus, setFocus, picture, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const router = useRouter();
   const [cursor, setCursor] = useState(false);
   useCursor(cursor);
@@ -1342,7 +1353,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
         depth: false
       }}
     >
-      {/* <StatsGl /> */}
+      <StatsGl />
 
       <motion.fog 
         attach="fog" 
@@ -1369,7 +1380,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
           <ScrollControls infinite damping={mq ? (2):(0)} distance={scroll_distance} pages={count_items}>
-              <AllProducts items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
+              <AllProducts setConsoleLog={setConsoleLog} items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
       </Suspense>
