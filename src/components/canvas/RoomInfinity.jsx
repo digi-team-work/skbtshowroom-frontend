@@ -1161,41 +1161,58 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
   let firstScrollSet = true;
   let countStop = 0;
   let countLimit = 50;
+
   useFrame(() => {
+    // set
+    // console.log(Math.ceil(scroll.el.scrollTop), scroll.el.scrollTop);
+    // scroll.el.scrollTop = Math.ceil(scroll.el.scrollTop); 
+    // scroll.scroll.current = Math.ceil(scroll.scroll.current * 100)/100; 
+
+    // console.log(Math.ceil(scroll.el.scrollTop), scroll.el.scrollTop);
+
+    // check zoom
+    let dZoom = (window.outerWidth / window.innerWidth) * 100;
+
+    // log
+    cnLog.current.innerText = `Zoom : ${dZoom} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+  
+
+    // run
     const percentRoom = (scroll.offset * mcRepeat)%1;
     roomRef.current.position.set((Math.sin((2 * Math.PI) * (percentRoom + offsetPI)) * cameraX), 0, (scroll.offset * mcDepth * mcRepeat));
 
-    if(scroll.scroll.current == 1){
-      countStop += 1;
-      // console.log('count '+countStop);
-      cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    // if(scroll.scroll.current == 1){
+    //   countStop += 1;
+    //   // console.log('count '+countStop);
+    //   cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
     
-      if(countStop >= countLimit){
-        scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
-        scroll.scroll.current = 0.995;
+    //   if(countStop >= countLimit){
+    //     scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
+    //     scroll.scroll.current = 0.995;
     
-        // console.log('jump');
-        cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-      }
-    }else if(scroll.scroll.current == 0){
-      countStop += 1;
-      // console.log('count '+countStop);
-      cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    //     // console.log('jump');
+    //     cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    //   }
+    // }else if(scroll.scroll.current == 0){
+    //   countStop += 1;
+    //   // console.log('count '+countStop);
+    //   cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
     
-      if(countStop >= countLimit){
-        scroll.el.scrollTop = 2;
-        scroll.scroll.current = 0.005;
+    //   if(countStop >= countLimit){
+    //     scroll.el.scrollTop = 2;
+    //     scroll.scroll.current = 0.005;
     
-        // console.log('jump');
-        cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-      }
-    }else {
-      // if(countStop != 0){
-        countStop = 0;
-        // console.log('clear');
-        cnLog.current.innerText = `Status : Clear \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-      // }
-    }
+    //     // console.log('jump');
+    //     cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    //   }
+    // }else {
+    //   // if(countStop != 0){
+    //     countStop = 0;
+    //     // console.log('clear');
+    //     cnLog.current.innerText = `Status : Clear \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    //   // }
+    // }
+
   })
 
   return (
@@ -1362,7 +1379,7 @@ export const RoomInfinite = ({cnLog, items, focus, setFocus, picture, basePath, 
             animate={{ z: 0}}
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
-          <ScrollControls infinite damping={mq ? (2):(0)} distance={scroll_distance} pages={count_items}>
+          <ScrollControls infinite damping={mq ? (2):(0)} distance={scroll_distance} pages={count_items} >
               <AllProducts cnLog={cnLog} items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
