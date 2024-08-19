@@ -1180,7 +1180,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
       
       // console.log('mousewheel', e);
 
-      if(mq){
+      if(window.innerWidth >= 1024){
         mwStatus = e.deltaY;
 
         if(mwStatus > 0){
@@ -1225,7 +1225,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
     // console.log(Math.ceil(scroll.el.scrollTop), scroll.el.scrollTop);
 
     // log
-    cnLog.current.innerText = `Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    cnLog.current.innerText = `Version : 1.1 \n Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
   
 
     // run
