@@ -1180,29 +1180,32 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
       
       // console.log('mousewheel', e);
 
-      mwStatus = e.deltaY;
+      if(mq){
+        mwStatus = e.deltaY;
 
-      if(mwStatus > 0){
-        // down
-
-        if(Math.ceil(scroll.scroll.current * 100)/100 >= 1){
-          // console.log('jump top');
+        if(mwStatus > 0){
+          // down
   
-          scroll.el.scrollTo(0,0);
-          scroll.scroll.current = 0;
-          scroll.offset = scroll.offset - 1;
-        }
-      }else if(mwStatus < 0) {
-        // up
-
-        if(scroll.scroll.current <= 0){
-          // console.log('jump bottom');
+          if(Math.ceil(scroll.scroll.current * 100)/100 >= 1){
+            // console.log('jump top');
+    
+            scroll.el.scrollTo(0,0);
+            scroll.scroll.current = 0;
+            scroll.offset = scroll.offset - 1;
+          }
+        }else if(mwStatus < 0) {
+          // up
   
-          scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
-          scroll.scroll.current = 1;
-          scroll.offset = 1 + scroll.offset;
+          if(scroll.scroll.current <= 0){
+            // console.log('jump bottom');
+    
+            scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
+            scroll.scroll.current = 1;
+            scroll.offset = 1 + scroll.offset;
+          }
         }
       }
+      
 
       
     }
