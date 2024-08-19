@@ -1161,6 +1161,57 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
   let firstScrollSet = true;
   let countStop = 0;
   let countLimit = 50;
+  let mwStatus = 0;
+
+  useEffect(function subscribeToWheelEvent() {
+    const updateScroll = function(e) {
+      // if(!!e.deltaY) {
+      //   setState((currentState)=>{
+      //        const delta = Math.sign(e.deltaY) * 10.0;
+      //        const val = Math.max(0, currentState.scrollTop + delta);
+      //        return {scrollTop:val}   
+      //   })            
+      // }
+    
+      // } else {
+      //   console.log('zero', e.deltaY);
+      // }
+
+      
+      // console.log('mousewheel', e);
+
+      mwStatus = e.deltaY;
+
+      if(mwStatus > 0){
+        // down
+
+        if(Math.ceil(scroll.scroll.current * 100)/100 >= 1){
+          console.log('jump top');
+  
+          scroll.el.scrollTo(0,0);
+          scroll.scroll.current = 0;
+          scroll.offset = scroll.offset - 1;
+        }
+      }else if(mwStatus < 0) {
+        // up
+
+        if(scroll.scroll.current <= 0){
+          console.log('jump bottom');
+  
+          scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
+          scroll.scroll.current = 1;
+          scroll.offset = 1 + scroll.offset;
+        }
+      }
+
+      
+    }
+    window.addEventListener('mousewheel', updateScroll);
+    console.log('subscribed to wheelEvent')
+    return function () {
+      window.removeEventListener('mousewheel', updateScroll);
+    }
+  }, []);
 
   useFrame(() => {
     // set
@@ -1170,11 +1221,8 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
 
     // console.log(Math.ceil(scroll.el.scrollTop), scroll.el.scrollTop);
 
-    // check zoom
-    let dZoom = (window.outerWidth / window.innerWidth) * 100;
-
     // log
-    cnLog.current.innerText = `Zoom : ${dZoom} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    cnLog.current.innerText = `Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
   
 
     // run
@@ -1213,7 +1261,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
     //   // }
     // }
 
-  })
+  });
 
   return (
     <group ref={roomRef} position={[0,0,0]}>
