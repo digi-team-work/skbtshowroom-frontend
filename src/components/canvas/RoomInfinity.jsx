@@ -1186,7 +1186,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
         // down
 
         if(Math.ceil(scroll.scroll.current * 100)/100 >= 1){
-          console.log('jump top');
+          // console.log('jump top');
   
           scroll.el.scrollTo(0,0);
           scroll.scroll.current = 0;
@@ -1196,7 +1196,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
         // up
 
         if(scroll.scroll.current <= 0){
-          console.log('jump bottom');
+          // console.log('jump bottom');
   
           scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
           scroll.scroll.current = 1;
@@ -1207,7 +1207,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
       
     }
     window.addEventListener('mousewheel', updateScroll);
-    console.log('subscribed to wheelEvent')
+    // console.log('subscribed to wheelEvent')
     return function () {
       window.removeEventListener('mousewheel', updateScroll);
     }
