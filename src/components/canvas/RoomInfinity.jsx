@@ -1168,32 +1168,32 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
     if(scroll.scroll.current == 1){
       countStop += 1;
       // console.log('count '+countStop);
-      cnLog.current.innerText = `Status : Count ${countLimit-countStop} | ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} | ${scroll.scroll.current}`;
+      cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
     
       if(countStop >= countLimit){
         scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
         scroll.scroll.current = 0.995;
     
         // console.log('jump');
-        cnLog.current.innerText = `Status : Jump | ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} | ${scroll.scroll.current}`;
+        cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
       }
     }else if(scroll.scroll.current == 0){
       countStop += 1;
       // console.log('count '+countStop);
-      cnLog.current.innerText = `Status : Count ${countLimit-countStop} | ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} | ${scroll.scroll.current}`;
+      cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
     
       if(countStop >= countLimit){
         scroll.el.scrollTop = 2;
         scroll.scroll.current = 0.005;
     
         // console.log('jump');
-        cnLog.current.innerText = `Status : Jump | ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} | ${scroll.scroll.current}`;
+        cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
       }
     }else {
       // if(countStop != 0){
         countStop = 0;
         // console.log('clear');
-        cnLog.current.innerText = `Status : Clear | ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} | ${scroll.scroll.current}`;
+        cnLog.current.innerText = `Status : Clear \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
       // }
     }
   })

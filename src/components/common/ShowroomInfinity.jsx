@@ -101,7 +101,7 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
         </div> 
       </div>
 
-      <div ref={cnLog} className='fixed left-2 bottom-2 p-3 bg-red-500 text-white whitespace-nowrap z-[99]'>Status : </div>
+      <div ref={cnLog} className='fixed left-2 bottom-2 p-3 bg-red-500 text-white whitespace-nowrap z-[99] text-xl'>Status : </div>
       
       <div ref={transitionPageRef} className='transitionPage flex justify-center items-center fixed left-0 top-0 w-full h-[100vh] bg-white pointer-events-none select-none z-[100]'>
         {howto && (
