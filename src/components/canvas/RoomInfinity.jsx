@@ -1180,7 +1180,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
       
       // console.log('mousewheel', e);
 
-      if(window.innerWidth >= 1024){
+      // if(window.innerWidth >= 1024){
         mwStatus = e.deltaY;
 
         if(mwStatus > 0){
@@ -1204,7 +1204,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
             scroll.offset = 1 + scroll.offset;
           }
         }
-      }
+      // }
       
 
       
@@ -1225,7 +1225,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
     // console.log(Math.ceil(scroll.el.scrollTop), scroll.el.scrollTop);
 
     // log
-    cnLog.current.innerText = `Version : 1.1 \n Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
+    cnLog.current.innerText = `Version : 1.2 \n Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
   
 
     // run
@@ -1430,7 +1430,7 @@ export const RoomInfinite = ({cnLog, items, focus, setFocus, picture, basePath, 
             animate={{ z: 0}}
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
-          <ScrollControls infinite damping={mq ? (2):(0)} distance={scroll_distance} pages={count_items} >
+          <ScrollControls infinite damping={mq ? (2):(1)} distance={scroll_distance} pages={count_items} >
               <AllProducts cnLog={cnLog} items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
