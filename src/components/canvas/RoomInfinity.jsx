@@ -1133,7 +1133,7 @@ export const CameraLoop = ({mcDepth, mcRepeat}) => {
   return (<></>)
 }
 
-export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const AllProducts = ({items, mcDepth, distance, mcRepeat, setFocus, picture, mq, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   // let textureLoader = new TextureLoader();
   //     textureLoader.crossOrigin = null;
   const [pic_1, pic_2] = useLoader(TextureLoader, picture);
@@ -1163,65 +1163,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
   let countLimit = 30;
   let mwStatus = 0;
 
-  // useEffect(function subscribeToWheelEvent() {
-  //   const updateScroll = function(e) {
-  //     mwStatus = e.deltaY;
-
-  //     if(mwStatus > 0){
-  //       // down
-  //       if(Math.ceil(scroll.scroll.current * 100)/100 >= 1){
-  //         scroll.el.scrollTo(0,0);
-  //         scroll.scroll.current = 0;
-  //         scroll.offset = scroll.offset - 1;
-  //       }
-  //     }else if(mwStatus < 0) {
-  //       // up
-  //       if(scroll.scroll.current <= 0){
-  //         scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
-  //         scroll.scroll.current = 1;
-  //         scroll.offset = 1 + scroll.offset;
-  //       }
-  //     }
-  //   }
-  //   window.addEventListener('mousewheel', updateScroll);
-  //   return function () {
-  //     window.removeEventListener('mousewheel', updateScroll);
-  //   }
-  // }, []);
-
-  // let jumpType = false;
-  // useEffect(function subscribeToScrollEvent() {
-  //   const updateScroll = function(e) {
-  //     if(scroll.scroll.current <= 0.001){
-  //       if(jumpType != "jump_up"){
-  //         jumpType = 'jump_down';
-  //         scroll.el.scrollTo(0,(scroll.el.scrollHeight-scroll.el.offsetHeight));
-  //         scroll.scroll.current = 0.99;
-  //         scroll.offset = 1 + scroll.offset;
-  //       }
-  //     }else if(scroll.scroll.current >= 0.999){
-  //       if(jumpType != "jump_down"){
-  //         jumpType = 'jump_up';
-  //         scroll.el.scrollTo(0,0);
-  //         scroll.scroll.current = 0.01;
-  //         scroll.offset = scroll.offset - 1;
-  //       }
-  //     }else {
-  //       jumpType = 'clear';
-  //     }
-  //   }
-  //   scroll.el.addEventListener('scroll', updateScroll);
-  //   return function () {
-  //     scroll.el.removeEventListener('scroll', updateScroll);
-  //   }
-  // }, []);
-
   useFrame(() => {
-    // log
-    // cnLog.current.innerText = `Version : 1.3 \n Status : ${mwStatus > 0 ? 'down':''} ${mwStatus < 0 ? 'up':''}  ${mwStatus == 0 ? 'none':''} ${mwStatus} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    cnLog.current.innerText = `Version : 1.3 \n Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-
-    // run
     const percentRoom = (scroll.offset * mcRepeat)%1;
     roomRef.current.position.set((Math.sin((2 * Math.PI) * (percentRoom + offsetPI)) * cameraX), 0, (scroll.offset * mcDepth * mcRepeat));
 
@@ -1233,51 +1175,9 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
         scroll.scroll.current = 0.01;
         scroll.offset = scroll.offset - 1;
       }
-    // }else if(scroll.scroll.current == 0){
-    //   countStop += 1;
-
-    //   if(countStop >= countLimit){
-    //     scroll.el.scrollTo(0,((scroll.el.scrollHeight-scroll.el.offsetHeight)*0.99));
-    //     scroll.scroll.current = 0.99;
-    //     scroll.offset = 1 + scroll.offset;  
-    //   }
     }else {
       countStop = 0;
     }
-    
-
-    // if(scroll.scroll.current == 1){
-    //   countStop += 1;
-    //   // console.log('count '+countStop);
-    //   cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    
-    //   if(countStop >= countLimit){
-    //     scroll.el.scrollTop = (scroll.el.scrollHeight-scroll.el.offsetHeight) - 2;
-    //     scroll.scroll.current = 0.995;
-    
-    //     // console.log('jump');
-    //     cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    //   }
-    // }else if(scroll.scroll.current == 0){
-    //   countStop += 1;
-    //   // console.log('count '+countStop);
-    //   cnLog.current.innerText = `Status : Count ${countLimit-countStop} \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    
-    //   if(countStop >= countLimit){
-    //     scroll.el.scrollTop = 2;
-    //     scroll.scroll.current = 0.005;
-    
-    //     // console.log('jump');
-    //     cnLog.current.innerText = `Status : Jump \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    //   }
-    // }else {
-    //   // if(countStop != 0){
-    //     countStop = 0;
-    //     // console.log('clear');
-    //     cnLog.current.innerText = `Status : Clear \n scroll : ${scroll.el.scrollTop+'/'+(scroll.el.scrollHeight-scroll.el.offsetHeight)} \n scroll : ${scroll.scroll.current} \n offset : ${scroll.offset}`;
-    //   // }
-    // }
-
   });
 
   return (
@@ -1376,7 +1276,7 @@ export const AllProducts = ({cnLog, items, mcDepth, distance, mcRepeat, setFocus
   )
 }
 
-export const RoomInfinite = ({cnLog, items, focus, setFocus, picture, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
+export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideoRef, videoPresenterRef, videoPresenterAlphaRef}) => {
   const router = useRouter();
   const [cursor, setCursor] = useState(false);
   useCursor(cursor);
@@ -1445,7 +1345,7 @@ export const RoomInfinite = ({cnLog, items, focus, setFocus, picture, basePath, 
             transition={{ ease:[0.33, 1, 0.68, 1], duration: 3 }}
           >
           <ScrollControls infinite damping={mq ? (2):(1)} distance={scroll_distance} pages={count_items} >
-              <AllProducts cnLog={cnLog} items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
+              <AllProducts items={items} mcDepth={one_room_depth} distance={scroll_distance} mcRepeat={room_repeat} setFocus={setFocus} picture={picture} mq={mq} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
           </ScrollControls>
         </motion.group>
       </Suspense>

@@ -19,8 +19,6 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
   const videoPresenterAlphaRef = useRef();
   const audioClickRef = useRef();
 
-  const cnLog = useRef();
-
   useEffect(() => {
     if(itemFocus != -1){
       // play sound
@@ -77,7 +75,7 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
         </audio>
       </div>
 
-      <RoomInfinite cnLog={cnLog} items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
+      <RoomInfinite items={items} focus={itemFocus} setFocus={setItemFocus} picture={picture} basePath={basePath} bgVideoRef={bgVideoRef} videoPresenterRef={videoPresenterRef} videoPresenterAlphaRef={videoPresenterAlphaRef} />
 
       <div className='hidden lg:flex justify-center items-center fixed left-0 bottom-0 w-full h-auto pointer-events-none select-none z-[90] p-4 bg-gradient-to-b from-black/0 to-black/50'>
         <div className='grid grid-cols-2 gap-10 text-lg lg:text-xl  leading-[10px] text-center text-white'>
@@ -100,8 +98,6 @@ export default function ShowroomInfinity({items, picture, basePath, presenter, a
           </div>
         </div> 
       </div>
-
-      <div ref={cnLog} className='fixed left-2 bottom-2 p-3 bg-red-500 text-white whitespace-nowrap z-[99] text-xl'>Status : </div>
       
       <div ref={transitionPageRef} className='transitionPage flex justify-center items-center fixed left-0 top-0 w-full h-[100vh] bg-white pointer-events-none select-none z-[100]'>
         {howto && (
