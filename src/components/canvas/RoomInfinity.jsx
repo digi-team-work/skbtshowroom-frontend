@@ -1318,7 +1318,7 @@ export const RoomInfinite = ({items, focus, setFocus, picture, basePath, bgVideo
         depth: false
       }}
     >
-      <StatsGl />
+      {/* <StatsGl /> */}
 
       <motion.fog 
         attach="fog" 
