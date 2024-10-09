@@ -28,7 +28,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          envsubst '\$SKBT_BRANCH,\$SKBT_HTTP_HOST,\$SKBT_SUBFOLDER,\$SKBT_BASEPATH' < .env.template > .env
+          envsubst '\$SKBT_BRANCH,\$SKBT_HTTP_HOST,\$SKBT_SUBFOLDER,\$SKBT_BASEPATH,\$NEXT_PUBLIC_API_URL' < .env.template > .env
           cat .env 
           npm install
           npm run build
