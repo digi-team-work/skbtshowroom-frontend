@@ -6,8 +6,8 @@ import HomeClient from '@/components/common/HomeClient';
 
 
 export async function generateMetadata({ params, searchParams }, parent) {
-  // fetch data
-  const resMetaData = await fetch(`https://skbt-main.digi-team.work/onlineshowroom-backend/wp-json/restapi/v2/home-managements`).then((res) => res.json())
+  // fetch data  
+  const resMetaData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/restapi/v2/home-managements`).then((res) => res.json())
   const metaData = resMetaData.seo_data;
   
   return {
@@ -34,8 +34,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
 }
 
 // fetch function
-async function getHomeDetail() {
-  const res = await fetch(`https://skbt-main.digi-team.work/onlineshowroom-backend/wp-json/restapi/v2/home-managements`, { cache: 'no-store' });
+async function getHomeDetail() {  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/restapi/v2/home-managements`, { cache: 'no-store' });
   return res.json();
 }
 

@@ -16,6 +16,7 @@ env:
   SKBT_HTTP_HOST: ${{ secrets.PRODUCTION_SKBT_HTTP_HOST }}
   SKBT_SUBFOLDER: ${{ secrets.PRODUCTION_SKBT_SUBFOLDER }}
   SKBT_BASEPATH: ${{ secrets.PRODUCTION_SKBT_BASEPATH }}    
+  NEXT_PUBLIC_API_URL: ${{ secrets.PRODUCTION_NEXT_PUBLIC_API_URL }}
 jobs:
   build:
     runs-on: ubuntu-latest
