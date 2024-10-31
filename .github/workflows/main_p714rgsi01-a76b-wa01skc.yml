@@ -10,13 +10,14 @@ on:
   workflow_dispatch:
 
 env:
-  APPLICATION_PUBLISH_PROFILE: ${{ secrets.PRODUCTION_APP_PUBLISH_PROFILE }}  
+  APPLICATION_PUBLISH_PROFILE: ${{ secrets.PRODUCTION_APP_PUBLISH_PROFILE }}
   WEBAPP_NAME: ${{ secrets.PRODUCTION_WEBAPP_NAME }}
   SKBT_BRANCH: ${{ secrets.PRODUCTION_SKBT_BRANCH }}
   SKBT_HTTP_HOST: ${{ secrets.PRODUCTION_SKBT_HTTP_HOST }}
   SKBT_SUBFOLDER: ${{ secrets.PRODUCTION_SKBT_SUBFOLDER }}
-  SKBT_BASEPATH: ${{ secrets.PRODUCTION_SKBT_BASEPATH }}    
+  SKBT_BASEPATH: ${{ secrets.PRODUCTION_SKBT_BASEPATH }}
   NEXT_PUBLIC_API_URL: ${{ secrets.PRODUCTION_NEXT_PUBLIC_API_URL }}
+  NEXT_PUBLIC_GTM: ${{ secrets.PRODUCTION_NEXT_PUBLIC_GTM }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -53,7 +54,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -62,7 +63,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
